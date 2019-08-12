@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>{{todo.title}}</h1>
-    <button @click="todo$.addTodo('blahblah')"></button>
+    <button @click="todoStore.addTodo('blahblah')"></button>
   </section>
 </template>
 
@@ -14,8 +14,8 @@ import { TodoStore, vxm } from "~/store"
   components: {}
 })
 export default class extends Vue {
-  todo$: TodoStore = vxm.todo
-  @Prop(String)
+  todoStore: TodoStore = vxm.todo
+  @Prop(Object)
   todo!: Todo
 }
 </script>

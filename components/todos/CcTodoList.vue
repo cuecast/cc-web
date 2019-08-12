@@ -3,15 +3,15 @@
     <cc-todo
       :key="todo.id"
       :todo="todo"
-      v-for="todo in todo$.todos"
+      v-for="todo in todoStore.todos"
     ></cc-todo>
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator"
-import CcTodo from "~/components/todos/CcTodo"
-import { TodoStore, vxm } from '~/store'
+import CcTodo from "./CcTodo.vue"
+import { vxm } from '~/store'
 
 @Component({
   components: {
@@ -19,7 +19,7 @@ import { TodoStore, vxm } from '~/store'
   }
 })
 export default class extends Vue {
-  todo$: TodoStore = vxm.todo
+  todoStore = vxm.todo
 }
 </script>
 
