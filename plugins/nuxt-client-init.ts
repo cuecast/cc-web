@@ -1,4 +1,7 @@
 // @ts-ignore
 export default async ({app}) => {
-  await app.store.dispatch('todo/nuxtClientInit', app)
+  let todos = [{id: 3, title: 'aaaaaaaaaaaaabl bah', completed: false}]
+
+  await app.store.dispatch('nuxtServerInit', todos)
 }
+

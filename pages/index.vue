@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1 class="header">Nuxt TypeScript Starter</h1>
     <div class="cards">
       <cc-todo-list></cc-todo-list>
     </div>

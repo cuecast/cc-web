@@ -14,6 +14,7 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
+    "noImplicitAny": false,
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {

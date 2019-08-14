@@ -1,6 +1,5 @@
 export default {
   env: {},
-  mode: 'universal',
   head: {
     title: "cuecast-web",
     meta: [
@@ -13,13 +12,23 @@ export default {
     ]
   },
   plugins: [
-    {src: '~/plugins/nuxt-client-init.ts', ssr: true},
+    {src: '~/plugins/axios-port.ts'},
+    {src: '~/plugins/nuxt-client-init.ts'},
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
   build: {},
   modules: [
     "@nuxtjs/axios",
+    'bootstrap-vue/nuxt',
   ],
-  axios: {}
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    host: 'localhost',
+    port: 4000,
+    prefix: '/api',
+    ssr: false,
+    proxyHeaders: false,
+    credentials: false
+  },
 }

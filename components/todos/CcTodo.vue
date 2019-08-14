@@ -1,22 +1,27 @@
 <template>
   <section>
-    <h1>{{todo.title}}</h1>
-    <button @click="todoStore.addTodo('blahblah')"></button>
+    <h1>{{todo.id}} | {{todo.title}}</h1>
+    <button @click="showEditModal()"></button>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator"
+import { Component, Emit, Prop, Vue } from "nuxt-property-decorator"
 import { Todo } from "~/types"
 import { TodoStore, vxm } from "~/store"
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class extends Vue {
+  @Prop() todo!: Todo
   todoStore: TodoStore = vxm.todo
-  @Prop(Object)
-  todo!: Todo
+  todoInputValue: string = this.todo.title
+
+  @Emit()
+  showEditModal() {
+    return this.todo
+  }
 }
 </script>
 
