@@ -13,6 +13,7 @@ export default {
   },
   plugins: [
     {src: '~/plugins/axios-port.ts'},
+    {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
   ],
   loading: {color: "#3B8070"},

@@ -6,3 +6,7 @@ export interface Todo {
   completed: boolean;
 }
 
+export interface User {
+  id: number
+  email: string
+}

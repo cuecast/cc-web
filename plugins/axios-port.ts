@@ -1,5 +1,5 @@
-import { setClient } from '~/services/api'
+import { setApi } from '~/utils/api'
 
-export default ({app, store}) => {
-  setClient(app.$axios)
+export default ({store}) => {
+  setApi(store.$axios)
 }

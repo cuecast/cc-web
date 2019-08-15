@@ -1,4 +1,4 @@
-import { action, getRawActionContext, Module, mutation, VuexModule } from "vuex-class-component";
+import { action, getter, getRawActionContext, Module, mutation, VuexModule } from "vuex-class-component";
 
 
 export class CuecastStore extends VuexModule {
@@ -6,5 +6,5 @@ export class CuecastStore extends VuexModule {
 }
 
 
-export { Module, action, mutation, VuexModule, getRawActionContext }
+export { Module, getter, action, mutation, VuexModule, getRawActionContext }
 
