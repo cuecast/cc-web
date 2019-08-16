@@ -15,12 +15,14 @@ export default {
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
+
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
   build: {},
   modules: [
-    "@nuxtjs/axios",
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
   ],
   axios: {
@@ -32,4 +34,20 @@ export default {
     proxyHeaders: false,
     credentials: false
   },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {url: '/users/sign_in'},
+          logout: {url: '/users/sign_out', method: 'delete'},
+          user: {url: '/users/current'}
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer',
+      }
+    },
+    plugins: [
+      '~/plugins/auth-port.ts'
+    ]
+  }
 }

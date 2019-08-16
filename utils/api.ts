@@ -1,6 +1,6 @@
 import { NuxtAxiosInstance } from "@nuxtjs/axios";
 
-declare module api {
+declare module service {
   interface Context {
     $axios: NuxtAxiosInstance
   }
