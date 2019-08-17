@@ -8,16 +8,16 @@ import { User } from "~/types";
 export class AuthStore extends CuecastStore {
   @getter currentUser: User | undefined
 
-  @action()
+  @action
   async signIn(params) {
-    await auth.login({
-      data: {
-        ...params
-      }
+    await auth.loginWith('local', {
+      data: {...params}
     })
   }
 
-  @mutation setCurrentUser({...user}: User) {
-    this.currentUser = user
+  @action
+  async signOut() {
+    await auth.logout()
   }
+
 }

@@ -2,7 +2,6 @@ import Vue, { ComponentOptions } from "vue";
 import { CookieAttributes } from "js-cookie";
 import { User } from "~/types";
 
-// todo: context?
 interface StorageCookieOptions extends CookieAttributes {
   cookie: {
     prefix: string;
@@ -39,7 +38,7 @@ interface Auth<T = any> {
   ctx: any;
   $state: any; // todo: type this
   $storage: Storage;
-  user: Partial<T>;
+  user: User;
   loggedIn: boolean;
 
   loginWith(strategyName: string, ...args): Promise<never>;
@@ -90,7 +89,7 @@ export function setAuth(newApp) {
 }
 
 const reqMethods = [
-  'login', 'loginWith'
+  'login', 'loginWith', 'logout'
 ]
 
 for (let method of reqMethods) {

@@ -1,7 +1,10 @@
 // user.vuex.ts
+import Vue from 'vue'
 import Vuex from 'vuex'
 import { AuthStore, TodoStore } from "~/store";
 import { Todo } from "~/types";
+
+Vue.use(Vuex)
 
 export const state = () => ({})
 

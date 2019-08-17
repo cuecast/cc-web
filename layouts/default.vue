@@ -1,17 +1,17 @@
 <template>
   <div>
-    <cc-header />
+    <c-header />
     <div class="container-fluid">
       <nuxt />
     </div>
   </div>
 </template>
 <script>
-import CcHeader from '@/components/ui/CcHeader'
+import CHeader from '@/components/ui/CHeader'
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({
-  components: { CcHeader }
+  components: { CHeader }
 })
 export default class Default extends Vue {
 }

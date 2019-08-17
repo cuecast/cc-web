@@ -1,5 +1,7 @@
 <template>
-  <h1>{{authStore.currentUser.email}}</h1>
+  <div v-if="$auth.loggedIn">
+    <h1>{{authStore.currentUser.email}}</h1>
+  </div>
 </template>
 
 <script lang="ts">

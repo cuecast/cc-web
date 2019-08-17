@@ -22,6 +22,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
   ],
@@ -32,7 +33,11 @@ export default {
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
-    credentials: false
+    credentials: false,
+    proxy: true
+  },
+  proxy: {
+    '/api/': { target: 'http://localhost:4000/', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
   },
   auth: {
     strategies: {
@@ -40,14 +45,19 @@ export default {
         endpoints: {
           login: {url: '/users/sign_in'},
           logout: {url: '/users/sign_out', method: 'delete'},
-          user: {url: '/users/current'}
-        }
-        // tokenRequired: true,
-        // tokenType: 'bearer',
+          user: {url: '/users/current', propertyName: false}
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer',
       }
+    },
+    redirect: {
+      login: '/users/sign-in',
+      home: '/users/profile'
     },
     plugins: [
       '~/plugins/auth-port.ts'
     ]
   }
+
 }
