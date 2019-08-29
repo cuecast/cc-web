@@ -1,18 +1,19 @@
 <template>
   <section>
-    <div class="cards">
-      <cc-todo-list></cc-todo-list>
-    </div>
+    <video-chat></video-chat>
+<!--    <audio-recorder></audio-recorder>-->
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator"
-import CcTodoList from "~/components/todos/CcTodoList.vue"
+import AudioRecorder from "~/components/audio-recorder/AudioRecorder.vue";
+import VideoChat from "~/components/video-chat/VideoChat.vue"
 
 @Component({
   components: {
-    CcTodoList
+    VideoChat,
+    AudioRecorder,
   },
 })
 export default class extends Vue {
@@ -20,12 +21,4 @@ export default class extends Vue {
 </script>
 
 <style scoped>
-.header {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-}
 </style>
