@@ -36,7 +36,7 @@ export default class extends Vue {
     remoteVideo: HTMLVideoElement
   };
   private localStream!: MediaStream;
-  private pc1!: RTCPeerConnection;
+  private currentConnection!: RTCPeerConnection;
   private pc2!: RTCPeerConnection;
   private offerOptions: Object = {
     offerToReceiveAudio: 1,
@@ -69,22 +69,22 @@ export default class extends Vue {
       if (audioTracks.length > 0) {
         console.log(`Using audio device: ${audioTracks[0].label}`);
       }
-      this.pc1 = new RTCPeerConnection({});
+      this.currentConnection = new RTCPeerConnection({});
       console.log('Created local peer connection object pc1');
-      this.pc1.addEventListener('icecandidate', e => this.onIceCandidate(this.pc1, e));
+      this.currentConnection.addEventListener('icecandidate', e => this.onIceCandidate(this.currentConnection, e));
       this.pc2 = new RTCPeerConnection({});
       console.log('Created remote peer connection object pc2');
       this.pc2.addEventListener('icecandidate', e => this.onIceCandidate(this.pc2, e));
-      this.pc1.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(this.pc1, e));
+      this.currentConnection.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(this.currentConnection, e));
       this.pc2.addEventListener('iceconnectionstatechange', e => this.onIceStateChange(this.pc2, e));
       this.pc2.addEventListener('track', this.gotRemoteStream);
 
-      this.localStream.getTracks().forEach(track => this.pc1.addTrack(track, this.localStream));
+      this.localStream.getTracks().forEach(track => this.currentConnection.addTrack(track, this.localStream));
       console.log('Added local stream to pc1');
 
       try {
         console.log('pc1 createOffer start');
-        const offer = await this.pc1.createOffer(this.offerOptions);
+        const offer = await this.currentConnection.createOffer(this.offerOptions);
         await this.onCreateOfferSuccess(offer);
       } catch (e) {
         this.onCreateSessionDescriptionError(e);
@@ -100,8 +100,8 @@ export default class extends Vue {
     console.log(`Offer from pc1\n${desc.sdp}`);
     console.log('pc1 setLocalDescription start');
     try {
-      await this.pc1.setLocalDescription(desc);
-      this.onSetLocalSuccess(this.pc1);
+      await this.currentConnection.setLocalDescription(desc);
+      this.onSetLocalSuccess(this.currentConnection);
     } catch (err) {
       this.onSetSessionDescriptionError(err);
     }
@@ -149,8 +149,8 @@ export default class extends Vue {
     }
     console.log('pc1 setRemoteDescription start');
     try {
-      await this.pc1.setRemoteDescription(desc);
-      this.onSetRemoteSuccess(this.pc1);
+      await this.currentConnection.setRemoteDescription(desc);
+      this.onSetRemoteSuccess(this.currentConnection);
     } catch (e) {
       this.onSetSessionDescriptionError(e);
     }
@@ -165,11 +165,11 @@ export default class extends Vue {
 
 
   private getName(pc: RTCPeerConnection) {
-    return (pc === this.pc1) ? 'pc1' : 'pc2';
+    return (pc === this.currentConnection) ? 'pc1' : 'pc2';
   }
 
   private getOtherPc(pc: RTCPeerConnection) {
-    return (pc === this.pc1) ? this.pc2 : this.pc1;
+    return (pc === this.currentConnection) ? this.pc2 : this.currentConnection;
   }
 
   private async onIceCandidate(pc, event) {
@@ -199,7 +199,7 @@ export default class extends Vue {
 
   private hangup() {
     console.log('Ending call');
-    this.pc1.close();
+    this.currentConnection.close();
     this.pc2.close();
   }
 }
