@@ -1,6 +1,6 @@
 import {Socket, Channel} from "phoenix";
 
-class RTC {
+export default class RTC {
   private RTCPeerConnection = null;
   private getUserMedia = null;
   private attachMediaStream = null;

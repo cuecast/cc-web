@@ -1,7 +1,6 @@
 <template>
   <section>
     <video-chat></video-chat>
-<!--    <audio-recorder></audio-recorder>-->
   </section>
 </template>
 
