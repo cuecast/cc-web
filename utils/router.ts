@@ -1,5 +1,4 @@
 import { VueRouter } from "vue-router/types/router";
-import api from "~/utils/api";
 
 // @ts-ignore
 let router: VueRouter = {};

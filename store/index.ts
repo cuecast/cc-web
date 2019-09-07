@@ -3,16 +3,16 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { AuthStore, CastStore } from "~/store";
+import { Socket } from "phoenix";
 
 Vue.use(Vuex)
 
 export const state = () => ({})
 
 export const actions = {
-  nuxtServerInit({commit}, {req}) {
-    // todos = context.isStatic ?
-    //   localRandomData :
-    //   await context.app.$axios.$get("./random-data.json");
+  nuxtServerInit({commit}, {context}) {
+    // let socket = new Socket("ws://localhost:4000/socket")
+    // socket.connect()
 
   },
 }

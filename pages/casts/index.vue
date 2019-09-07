@@ -4,7 +4,7 @@
     <hr>
     <cast-form />
     <br>
-    <cast-list />
+    <cast-list :casts="this.castStore.casts" />
   </div>
 </template>
 
@@ -13,10 +13,18 @@ import { Vue, Component } from "nuxt-property-decorator"
 import CastList from "~/components/casts/CastList.vue"
 import CastForm from "~/components/casts/CastForm.vue"
 
+import { CastStore, vxm } from "~/store"
+
 @Component({
   components: {CastList, CastForm}
 })
 export default class extends Vue {
+  castStore: CastStore = vxm.casts
+
+  mounted() {
+    this.castStore.connect()
+    this.castStore.fetchCasts()
+  }
 }
 </script>
 

@@ -1,4 +1,5 @@
 import { NuxtAxiosInstance } from "@nuxtjs/axios";
+import { Socket } from "phoenix";
 
 declare module service {
   interface Context {

@@ -15,7 +15,6 @@ export default {
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
-
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -34,7 +33,6 @@ export default {
     }]
   ],
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
     host: 'localhost',
     port: 4000,
     prefix: '/api',
