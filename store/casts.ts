@@ -8,7 +8,6 @@ let socket: CuecastSocket;
 
 @Module({namespacedPath: "casts/", target: "nuxt"})
 export class CastStore extends CuecastStore {
-  @getter sdp!: Object
   @getter casts: any = []
 
   @mutation SET_CASTS(casts) {
@@ -42,6 +41,7 @@ export class CastStore extends CuecastStore {
 
   @action
   async fetchCasts() {
+    this.connect()
     await api.$get('casts').then(res => {
       this.SET_CASTS(res)
     })

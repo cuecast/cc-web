@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { AuthStore, CastStore } from "~/store";
-import { Socket } from "phoenix";
 
 Vue.use(Vuex)
 

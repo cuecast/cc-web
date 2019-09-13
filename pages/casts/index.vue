@@ -22,7 +22,6 @@ export default class extends Vue {
   castStore: CastStore = vxm.casts
 
   mounted() {
-    this.castStore.connect()
     this.castStore.fetchCasts()
   }
 }
