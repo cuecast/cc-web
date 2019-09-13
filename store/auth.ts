@@ -16,6 +16,13 @@ export class AuthStore extends CuecastStore {
   }
 
   @action
+  async signUp(params) {
+    await api.post('/users', {
+      user: {...params}
+    })
+  }
+
+  @action
   async signOut() {
     await auth.logout()
   }

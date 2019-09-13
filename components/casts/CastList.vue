@@ -6,7 +6,7 @@
       <b-list-group>
         <b-list-group-item :key="cast.id" v-for="cast in casts">
           <div class="float-left">
-            {{cast.name}}
+            {{cast.id}} - {{cast.name}}
           </div>
           <div class="float-right">
             <button @click="removeCast(cast)">X</button>
