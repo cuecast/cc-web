@@ -23,7 +23,7 @@
     "ts-node": "8.3.0",
     "vue": "^2.6.10",
     "vuex-class": "0.3.2",
-    "vuex-class-component": "github:cachepos/vuex-class-component"
+    "vuex-class-component": "^2.0.4"
   },
   "scripts": {
     "dev": "nuxt",

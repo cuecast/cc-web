@@ -2,34 +2,51 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { AuthStore, CastStore } from "~/store";
+import { CastStore, StreamStore, AuthStore } from "~/store";
+import { createProxy, extractVuexModule } from "./cuecast-store";
+import auth from "~/utils/auth";
 
 Vue.use(Vuex)
 
-export const state = () => ({})
+
+export const state = () => ({
+  auth: {
+    user: {
+      id: '',
+      email: ''
+    }
+  }
+})
 
 export const actions = {
   nuxtServerInit({commit}, {context}) {
-    // let socket = new Socket("ws://localhost:4000/socket")
-    // socket.connect()
-
   },
+}
+
+export const mutations = {
+  setUser(state, user) {
+    state.auth.user = user
+  }
 }
 
 export const store = new Vuex.Store({
   state: state(),
   modules: {
-    auth: AuthStore.ExtractVuexModule(AuthStore),
-    casts: CastStore.ExtractVuexModule(CastStore),
+    ...extractVuexModule(AuthStore),
+    ...extractVuexModule(CastStore),
+    ...extractVuexModule(StreamStore),
   },
-  actions: actions
+  actions: actions,
+  mutations: mutations
 })
 
 export { AuthStore } from "./auth";
 export { CastStore } from "./casts";
+export { StreamStore } from "./streams";
 
 export const vxm = {
-  auth: AuthStore.CreateProxy(store, AuthStore),
-  casts: CastStore.CreateProxy(store, CastStore),
+  auth: createProxy(store, AuthStore),
+  casts: createProxy(store, CastStore),
+  streams: createProxy(store, StreamStore),
 }
 

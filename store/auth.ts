@@ -1,18 +1,33 @@
-import { action, getter, CuecastStore, Module, mutation } from "~/store/cuecast-store";
+import { action, mutation, VuexModule } from "~/store/cuecast-store";
 import api from '~/utils/api'
-import router from '~/utils/router'
 import auth from '~/utils/auth'
 import { User } from "~/types";
 
-@Module({namespacedPath: "auth/", target: "nuxt"})
-export class AuthStore extends CuecastStore {
-  @getter currentUser: User | undefined
+declare var $nuxt: any;
+
+export class AuthStore extends VuexModule {
+  currentUser: User = {
+    id: 0,
+    email: ''
+  };
+
+  get user() {
+    this.setCurrentUser()
+    return this.currentUser
+  }
 
   @action
   async signIn(params) {
-    await auth.loginWith('local', {
+    await auth.login({
       data: {...params}
+    }).then(() => {
+      this.setCurrentUser()
     })
+  }
+
+  @action
+  async signOut() {
+    await auth.logout()
   }
 
   @action
@@ -22,9 +37,8 @@ export class AuthStore extends CuecastStore {
     })
   }
 
-  @action
-  async signOut() {
-    await auth.logout()
+  @mutation setCurrentUser() {
+    this.currentUser = $nuxt.$auth.$state.user
   }
 
 }

@@ -1,29 +1,14 @@
-import {Socket, Channel} from "phoenix";
+import { api } from "~/utils";
 
-export default class RTC {
-  private RTCPeerConnection = null;
-  private getUserMedia = null;
-  private attachMediaStream = null;
-  private reattachMediaStream = null;
-  private webrtcDetectedBrowser = null;
-  private localStream = null;
-  private remoteStream = null;
-  private channelReady: boolean = false;
+export const JOIN_CALL = "JOIN_CALL";
+export const EXCHANGE = "EXCHANGE";
+export const LEAVE_CALL = "LEAVE_CALL";
 
-  constructor(sURL, localStream, remoteStream) {
-    let signalingURL = sURL;
-    this.localStream = localStream;
-    this.remoteStream = remoteStream;
-    this.initWebRTCAdapter();
-    this.openChannel();
-  }
+export const ice = {
+  iceServers: [
+    {
+      urls: "stun:stun2.l.google.com:19302"
+    }
+  ]
+};
 
-  private openChannel() {
-    this.channelReady = false
-  }
-
-  private initWebRTCAdapter() {
-
-  }
-
-}

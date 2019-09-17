@@ -89,7 +89,7 @@ export function setAuth(newApp) {
 }
 
 const reqMethods = [
-  'login', 'loginWith', 'logout'
+  'login', 'loginWith', 'logout', 'fetchUserOnce'
 ]
 
 for (let method of reqMethods) {

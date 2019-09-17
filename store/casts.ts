@@ -1,14 +1,13 @@
 import Vue from "vue";
-import { action, CuecastStore, getter, Module, mutation } from "~/store/cuecast-store";
+import { action, mutation, VuexModule } from "~/store/cuecast-store";
 import CuecastSocket from '../channels/cuecast-socket'
 import { api } from '~/utils'
 
 
 let socket: CuecastSocket;
 
-@Module({namespacedPath: "casts/", target: "nuxt"})
-export class CastStore extends CuecastStore {
-  @getter casts: any = []
+export class CastStore extends VuexModule {
+  casts: any = []
 
   @mutation SET_CASTS(casts) {
     this.casts = casts

@@ -1,6 +1,18 @@
-import { action, getRawActionContext, getter, Module, mutation, VuexModule } from "vuex-class-component";
+import {
+  action,
+  createModule,
+  createProxy,
+  extractVuexModule,
+  getRawActionContext,
+  getter,
+  Module,
+  mutation
+} from "vuex-class-component";
 
-export class CuecastStore extends VuexModule {
-}
+const VuexModule = createModule({
+  namespaced: true,
+  strict: false,
+  target: "nuxt",
+});
 
-export { Module, getter, action, mutation, VuexModule, getRawActionContext }
+export {createModule, Module, getter, action, mutation, VuexModule, extractVuexModule, getRawActionContext, createProxy }

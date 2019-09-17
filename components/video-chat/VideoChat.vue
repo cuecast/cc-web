@@ -3,7 +3,6 @@
     <h1>Video Chat Example</h1>
     <div class="card">
       <div class="card-body">
-
         <div class="row">
           <div class="col-md-6">
             <video autoplay="autoplay" height="100%" muted
@@ -12,12 +11,9 @@
           <div class="col-md-6">
             <video autoplay="autoplay" height="100%" muted
                    ref="remoteVideo" width="100%"></video>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <input @click="startStream()" id="start" type="button" value="Stream" />
-            <input @click="call()" id="call" type="button" value="Call" />
+            <div id="remote-video-container">
+
+            </div>
           </div>
         </div>
       </div>
@@ -46,13 +42,13 @@ export default class extends Vue {
   private channel!: Channel;
   private users: any;
 
-  async startStream() {
-    console.log('Requesting local stream');
+  async mounted() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-      console.log('Received local stream');
       this.$refs.localVideo.srcObject = stream;
       this.localStream = stream;
+      let streams = {remoteVideo: this.$refs.remoteVideo, localStream: this.localStream}
+      this.$emit('start-stream', streams)
     } catch (e) {
       alert(`getUserMedia() error: ${e.name}`);
     }
@@ -162,7 +158,6 @@ export default class extends Vue {
       console.log('pc2 received remote stream');
     }
   }
-
 
   private getName(pc: RTCPeerConnection) {
     return (pc === this.currentConnection) ? 'pc1' : 'pc2';
