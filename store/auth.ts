@@ -1,7 +1,6 @@
 import { action, mutation, VuexModule } from "~/store/cuecast-store";
-import api from '~/utils/api'
-import auth from '~/utils/auth'
 import { User } from "~/types";
+import { api, auth, router } from "~/utils";
 
 declare var $nuxt: any;
 
@@ -22,6 +21,7 @@ export class AuthStore extends VuexModule {
       data: {...params}
     }).then(() => {
       this.setCurrentUser()
+      router.push('/')
     })
   }
 
@@ -34,6 +34,9 @@ export class AuthStore extends VuexModule {
   async signUp(params) {
     await api.post('/users', {
       user: {...params}
+    }).then(() => {
+      this.setCurrentUser()
+      router.push('/')
     })
   }
 

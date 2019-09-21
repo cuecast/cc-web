@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 export default {
   env: {},
   head: {
@@ -10,6 +13,14 @@ export default {
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"}
     ]
+  },
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
+    }
   },
   plugins: [
     {src: '~/plugins/axios-port.ts'},
@@ -42,7 +53,7 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: 'http://localhost:4000/', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+    '/api/': { target: 'https://10.0.93.162:3000', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
   },
   auth: {
     strategies: {

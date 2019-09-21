@@ -23,7 +23,8 @@
     "ts-node": "8.3.0",
     "vue": "^2.6.10",
     "vuex-class": "0.3.2",
-    "vuex-class-component": "^2.0.4"
+    "vuex-class-component": "^2.0.4",
+    "webrtc-adapter": "^7.3.0"
   },
   "scripts": {
     "dev": "nuxt",
