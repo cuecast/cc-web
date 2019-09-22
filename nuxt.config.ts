@@ -26,6 +26,7 @@ export default {
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
+    {src: '~/plugins/aws-amplify.js'},
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
