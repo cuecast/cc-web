@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 
+let development = process.env.NODE_ENV !== 'production'
+
 export default {
   env: {
     baseUrl:
@@ -43,7 +45,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
     ['nuxt-fontawesome', {
@@ -55,17 +57,16 @@ export default {
     }]
   ],
   axios: {
-    host: 'https://murmuring-thicket-39385.herokuapp.com',
-    port: 4000,
+    baseURL: development ? 'http://localhost:4000' : 'https://murmuring-thicket-39385.herokuapp.com',
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
     credentials: false,
-    proxy: true
+    // proxy: true
   },
-  proxy: {
-    '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
-  },
+  // proxy: {
+  //   '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+  // },
   auth: {
     strategies: {
       local: {
