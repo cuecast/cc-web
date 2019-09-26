@@ -55,7 +55,7 @@ export default {
     }]
   ],
   axios: {
-    host: process.env.baseApiUrl,
+    host: 'https://murmuring-thicket-39385.herokuapp.com',
     port: 4000,
     prefix: '/api',
     ssr: false,
@@ -64,7 +64,7 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: process.env.baseUrl || 'https://localhost:3000', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+    '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com/', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
   },
   auth: {
     strategies: {
