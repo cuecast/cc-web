@@ -2,13 +2,16 @@ import fs from "fs";
 import path from "path";
 
 export default {
-  env: {},
+  env: {
+    hostName: process.env.API_HOST_NAME || 'localhost',
+    baseUrl: `https://${process.env.hostName}`
+  },
   head: {
     title: "cuecast-web",
     meta: [
       {charset: "utf-8"},
       {name: "viewport", content: "width=device-width, initial-scale=1"},
-      {hid: "description", name: "description", content: "Nuxt.js TypeScript project"}
+      {hid: "description", name: "description", content: "CueCast"}
     ],
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"}
@@ -44,7 +47,7 @@ export default {
     }]
   ],
   axios: {
-    host: 'localhost',
+    host: process.env.hostName,
     port: 4000,
     prefix: '/api',
     ssr: false,
@@ -53,7 +56,7 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: 'https://10.0.93.162:3000', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+    '/api/': { target: process.env.baseUrl, pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
   },
   auth: {
     strategies: {
