@@ -4,18 +4,7 @@ import path from "path";
 let development = process.env.NODE_ENV !== 'production'
 
 export default {
-  env: {
-    baseUrl:
-      process.env.NODE_ENV !== 'production' ?
-        'https://localhost:3000' :
-        'https://murmuring-thicket-39385.herokuapp.com',
-    baseApiUrl:
-      process.env.NODE_ENV !== 'production' ?
-        'https://localhost:4000' :
-        'https://localhost:4000'
-
-
-  },
+  env: {},
   head: {
     title: "cuecast-web",
     meta: [
@@ -57,16 +46,19 @@ export default {
     }]
   ],
   axios: {
-    baseURL: development ? 'http://localhost:4000' : 'https://murmuring-thicket-39385.herokuapp.com',
+    baseURL: development ? 'https://localhost:4000' : 'https://murmuring-thicket-39385.herokuapp.com',
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
     credentials: false,
-    // proxy: true
+    proxy: true
   },
-  // proxy: {
-  //   '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
-  // },
+  proxy: {
+    '/api/': {
+      target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
+      pathRewrite: {'^/api/': '/api/'}, changeOrigin: true
+    }
+  },
   auth: {
     strategies: {
       local: {
