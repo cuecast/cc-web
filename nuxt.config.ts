@@ -1,10 +1,20 @@
 import fs from "fs";
 import path from "path";
 
+
+
 export default {
   env: {
-    hostName: process.env.API_HOST_NAME || 'localhost',
-    baseUrl: `https://${process.env.hostName}`
+    baseUrl:
+      process.env.NODE_ENV !== 'production' ?
+        'localhost:3000' :
+        'murmuring-thicket-39385.herokuapp.com',
+    baseApiUrl:
+      process.env.NODE_ENV !== 'production' ?
+        'localhost:4000' :
+        'localhost:4000'
+
+
   },
   head: {
     title: "cuecast-web",
@@ -47,7 +57,7 @@ export default {
     }]
   ],
   axios: {
-    host: process.env.hostName,
+    host: process.env.baseApiUrl,
     port: 4000,
     prefix: '/api',
     ssr: false,
