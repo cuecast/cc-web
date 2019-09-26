@@ -1,18 +1,16 @@
 import fs from "fs";
 import path from "path";
 
-
-
 export default {
   env: {
     baseUrl:
       process.env.NODE_ENV !== 'production' ?
-        'localhost:3000' :
-        'murmuring-thicket-39385.herokuapp.com',
+        'https://localhost:3000' :
+        'https://murmuring-thicket-39385.herokuapp.com',
     baseApiUrl:
       process.env.NODE_ENV !== 'production' ?
-        'localhost:4000' :
-        'localhost:4000'
+        'https://localhost:4000' :
+        'https://localhost:4000'
 
 
   },
