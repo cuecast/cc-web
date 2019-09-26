@@ -43,7 +43,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
     ['nuxt-fontawesome', {
@@ -61,7 +61,7 @@ export default {
     ssr: false,
     proxyHeaders: false,
     credentials: false,
-    proxy: true
+    // proxy: true
   },
   // proxy: {
   //   '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com/', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
