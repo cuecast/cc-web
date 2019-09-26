@@ -63,9 +63,9 @@ export default {
     credentials: false,
     proxy: true
   },
-  proxy: {
-    '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com/', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
-  },
+  // proxy: {
+  //   '/api/': { target: 'https://master.d3gdo8t508ooot.amplifyapp.com/', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+  // },
   auth: {
     strategies: {
       local: {
