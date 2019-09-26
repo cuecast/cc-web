@@ -64,7 +64,7 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: process.env.baseUrl, pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+    '/api/': { target: process.env.baseUrl || 'https://localhost:3000', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
   },
   auth: {
     strategies: {
