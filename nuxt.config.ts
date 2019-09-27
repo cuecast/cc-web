@@ -54,13 +54,13 @@ export default {
     proxyHeaders: false,
     credentials: false,
   },
-  proxy: {
-    '/api/': {
-      target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
-      pathRewrite: {'^/api/': '/api/'},
-      changeOrigin: true
-    }
-  },
+  // proxy: {
+  //   '/api/': {
+  //     target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
+  //     pathRewrite: {'^/api/': '/api/'},
+  //     changeOrigin: true
+  //   }
+  // },
   auth: {
     strategies: {
       local: {
