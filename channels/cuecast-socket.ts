@@ -7,7 +7,7 @@ export default class CuecastSocket {
   static socket: Socket;
 
   constructor() {
-    let socket = new Socket("wss://10.0.93.162:4000/socket")
+    let socket = new Socket(`wss://${process.env.baseUrl}/socket`)
     socket.connect()
     this.channel = socket.channel('cast:main', {})
 

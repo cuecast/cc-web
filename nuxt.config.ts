@@ -2,9 +2,12 @@ import fs from "fs";
 import path from "path";
 
 let development = process.env.NODE_ENV !== 'production'
+let baseUrl = development ? 'localhost:4000' : 'murmuring-thicket-39385.herokuapp.com'
 
 export default {
-  env: {},
+  env: {
+    baseUrl: baseUrl
+  },
   head: {
     title: "cuecast-web",
     meta: [
@@ -46,17 +49,23 @@ export default {
     }]
   ],
   axios: {
-    baseURL: development ? 'https://localhost:4000' : 'https://murmuring-thicket-39385.herokuapp.com',
-    prefix: '/api',
+    baseURL: 'https://' + baseUrl + '/api',
+    // prefix: '/api',
     ssr: false,
     proxyHeaders: false,
     credentials: false,
-    proxy: true
+    // proxy: true
   },
   proxy: {
     '/api/': {
       target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
-      pathRewrite: {'^/api/': '/api/'}, changeOrigin: true
+      pathRewrite:
+        {
+          '^/api/':
+            '/api/'
+        }
+      ,
+      changeOrigin: true
     }
   },
   auth: {
