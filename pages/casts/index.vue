@@ -25,7 +25,8 @@ export default class extends Vue {
     console.log('Mounted casts.')
     this.castStore.fetchCasts()
     let casts = this.castStore.casts
-    console.log()
+    console.dir(casts)
+    debugger
   }
 }
 </script>
