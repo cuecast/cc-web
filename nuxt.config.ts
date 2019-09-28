@@ -2,11 +2,19 @@ import fs from "fs";
 import path from "path";
 
 let development = process.env.NODE_ENV !== 'production'
-let hostName = development ? 'localhost:4000' : 'murmuring-thicket-39385.herokuapp.com'
+let hostName = development ? 'localhost:4000' : 'cuecast-alb-1030250719.ca-central-1.elb.amazonaws.com'
+console.log('=============================================')
+console.log(`hostName: ${hostName}`)
+console.log('=============================================')
 
 export default {
   env: {
     baseUrl: hostName
+  },
+  buildModules: ['@nuxt/typescript-build'],
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true
   },
   head: {
     title: "cuecast-web",
@@ -49,7 +57,7 @@ export default {
     }]
   ],
   axios: {
-    baseURL: `https://${hostName}/api`,
+    baseURL: `http://cuecast-alb-1030250719.ca-central-1.elb.amazonaws.com/api/`,
     ssr: false,
     proxyHeaders: false,
     credentials: false,

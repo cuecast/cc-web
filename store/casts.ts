@@ -2,12 +2,13 @@ import Vue from "vue";
 import { action, mutation, VuexModule } from "~/store/cuecast-store";
 import CuecastSocket from '../channels/cuecast-socket'
 import { api } from '~/utils'
+import { Cast } from "~/types";
 
 
 let socket: CuecastSocket;
 
 export class CastStore extends VuexModule {
-  casts: any = []
+  casts: Cast[] = []
 
   @mutation SET_CASTS(casts) {
     this.casts = casts
@@ -19,17 +20,19 @@ export class CastStore extends VuexModule {
 
   @mutation REMOVE_CAST(cast) {
     let found = this.casts.find(c => c.id === cast.id);
-    let idx = this.casts.indexOf(found);
+    let idx = this.casts.indexOf(<Cast>found);
     Vue.delete(this.casts, idx)
   }
 
   @action
   async connect() {
+    console.log('Connecting to CuecastSocket.')
     socket = new CuecastSocket()
   }
 
   @action
   async addCast(params) {
+    console.log('adding cast...')
     socket.addCast(params)
   }
 
@@ -40,6 +43,7 @@ export class CastStore extends VuexModule {
 
   @action
   async fetchCasts() {
+    console.log('fetching casts...')
     this.connect()
     await api.$get('casts').then(res => {
       this.SET_CASTS(res)
