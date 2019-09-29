@@ -42,7 +42,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
     ['nuxt-fontawesome', {
@@ -59,13 +59,13 @@ export default {
     proxyHeaders: false,
     credentials: false,
   },
-  proxy: {
-    '/api/': {
-      target: (development ? 'https://localhost:3000' : 'https://murmuring-thicket-39385.herokuapp.com'),
-      pathRewrite: {'^/api/': '/api/'},
-      changeOrigin: true
-    }
-  },
+  // proxy: {
+  //   '/api/': {
+  //     target: (development ? 'https://localhost:3000' : 'https://murmuring-thicket-39385.herokuapp.com'),
+  //     pathRewrite: {'^/api/': '/api/'},
+  //     changeOrigin: true
+  //   }
+  // },
   auth: {
     strategies: {
       local: {
