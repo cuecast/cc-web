@@ -8,7 +8,7 @@ import { Cast } from "~/types";
 let socket: CuecastSocket;
 
 export class CastStore extends VuexModule {
-  casts: Cast[] = []
+  casts: Cast[] = <Cast[]>[{name: 'hello'}, {name: 'world'}]
 
   @mutation SET_CASTS(casts) {
     this.casts = casts

@@ -9,7 +9,8 @@ export default class StreamSocket {
 
   constructor() {
     this.ss = vxm.streams;
-    let socket = new Socket("wss://10.0.93.162:4000/socket")
+    console.log(process.env.hostName)
+    let socket = new Socket(`wss://${process.env.hostName}/socket`)
     socket.connect()
     this.channel = socket.channel('stream:main', {})
 

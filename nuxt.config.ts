@@ -2,14 +2,11 @@ import fs from "fs";
 import path from "path";
 
 let development = process.env.NODE_ENV !== 'production'
-let hostName = development ? 'localhost:4000' : 'cuecast-alb-1030250719.ca-central-1.elb.amazonaws.com'
-console.log('=============================================')
-console.log(`hostName: ${hostName}`)
-console.log('=============================================')
+let hostName = development ? 'localhost:4000' : 'murmuring-thicket-39385.herokuapp.com'
 
 export default {
   env: {
-    baseUrl: hostName
+    hostName: hostName
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
@@ -45,7 +42,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    // '@nuxtjs/proxy',
+    '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
     ['nuxt-fontawesome', {
@@ -57,18 +54,18 @@ export default {
     }]
   ],
   axios: {
-    baseURL: `http://cuecast-alb-1030250719.ca-central-1.elb.amazonaws.com/api/`,
+    baseURL: `https://${hostName}/api`,
     ssr: false,
     proxyHeaders: false,
     credentials: false,
   },
-  // proxy: {
-  //   '/api/': {
-  //     target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
-  //     pathRewrite: {'^/api/': '/api/'},
-  //     changeOrigin: true
-  //   }
-  // },
+  proxy: {
+    '/api/': {
+      target: (development ? 'https://localhost:3000' : 'https://murmuring-thicket-39385.herokuapp.com'),
+      pathRewrite: {'^/api/': '/api/'},
+      changeOrigin: true
+    }
+  },
   auth: {
     strategies: {
       local: {

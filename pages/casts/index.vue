@@ -27,8 +27,6 @@ export default class extends Vue {
     let casts = this.castStore.casts
     console.log('Listing casts:')
     console.dir(casts)
-    console.log('Debugger:')
-    debugger
   }
 }
 </script>

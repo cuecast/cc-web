@@ -7,7 +7,9 @@ export default class CuecastSocket {
   static socket: Socket;
 
   constructor() {
-    let socket = new Socket(`wss://${process.env.baseUrl}/socket`)
+    let socketUrl = `wss://${process.env.hostName}/socket`
+    console.log(socketUrl)
+    let socket = new Socket(socketUrl)
     socket.connect()
     this.channel = socket.channel('cast:main', {})
 
@@ -29,6 +31,7 @@ export default class CuecastSocket {
   }
 
   addCast(params) {
+    console.log('pushing to new_cast:', params.name)
     this.channel.push('new_cast', params)
   }
 
