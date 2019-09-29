@@ -24,14 +24,14 @@ export default {
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"}
     ]
   },
-  server: {
-    port: 3000,
-    // host: '0.0.0.0',
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
-    }
-  },
+  // server: {
+  //   port: 3000,
+  //   // host: '0.0.0.0',
+  //   https: {
+  //     key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
+  //     cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
+  //   }
+  // },
   plugins: [
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
