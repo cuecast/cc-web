@@ -5,6 +5,7 @@ let development = process.env.NODE_ENV !== 'production'
 let hostName = development ? 'localhost:4000' : 'murmuring-thicket-39385.herokuapp.com'
 
 export default {
+  mode: 'spa',
   env: {
     hostName: hostName
   },
@@ -58,14 +59,15 @@ export default {
     ssr: false,
     proxyHeaders: false,
     credentials: false,
+    proxy: true
   },
-  // proxy: {
-  //   '/api/': {
-  //     target: (development ? 'https://localhost:3000' : 'https://murmuring-thicket-39385.herokuapp.com'),
-  //     pathRewrite: {'^/api/': '/api/'},
-  //     changeOrigin: true
-  //   }
-  // },
+  proxy: {
+    '/api/': {
+      target: (development ? 'https://localhost:3000' : 'https://murmuring-thicket-39385.herokuapp.com'),
+      pathRewrite: {'^/api/': '/api/'},
+      changeOrigin: true
+    }
+  },
   auth: {
     strategies: {
       local: {
