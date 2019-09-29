@@ -5,7 +5,6 @@ let development = process.env.NODE_ENV !== 'production'
 let hostName = development ? 'localhost:4000' : 'murmuring-thicket-39385.herokuapp.com'
 
 export default {
-  mode: 'spa',
   env: {
     hostName: hostName
   },
@@ -25,14 +24,14 @@ export default {
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"}
     ]
   },
-  // server: {
-  //   port: 3000,
-  //   // host: '0.0.0.0',
-  //   https: {
-  //     key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
-  //     cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
-  //   }
-  // },
+  server: {
+    port: 3000,
+    // host: '0.0.0.0',
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
+    }
+  },
   plugins: [
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
