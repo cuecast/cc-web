@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 let development = process.env.NODE_ENV !== 'production'
-let hostName = development ? 'localhost:4000' : 'murmuring-thicket-39385.herokuapp.com'
+let hostName = development ? 'localhost:4000' : 'blooming-wildwood-45560.herokuapp.com'
 
 export default {
   env: {
@@ -25,8 +25,9 @@ export default {
     ]
   },
   server: {
-    port: 3000,
+    // port: 3000,
     // host: '0.0.0.0',
+    url: `https://${process.env.hostName}`,
     https: {
       key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
@@ -62,7 +63,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: (development ? 'https://localhost:3000' : 'https://murmuring-thicket-39385.herokuapp.com'),
+      target: 'https://blooming-wildwood-45560.herokuapp.com',
       pathRewrite: {'^/api/': '/api/'},
       changeOrigin: true
     }
