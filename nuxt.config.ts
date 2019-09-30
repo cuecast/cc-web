@@ -43,7 +43,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    // '@nuxtjs/proxy',
+    '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
     ['nuxt-fontawesome', {
