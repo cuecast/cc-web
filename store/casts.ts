@@ -6,6 +6,7 @@ import { Cast } from "~/types";
 
 
 let socket: CuecastSocket;
+declare var $nuxt: any;
 
 export class CastStore extends VuexModule {
   casts: Cast[] = <Cast[]>[{name: 'hello'}, {name: 'world'}]
@@ -33,8 +34,9 @@ export class CastStore extends VuexModule {
   @action
   async addCast(params) {
     console.log('adding cast...')
-    debugger
-    api.$post('casts', params)
+    api.$post('api/casts', {cast: params}).then(() => {
+      alert('success.')
+    })
     // socket.addCast(params)
   }
 

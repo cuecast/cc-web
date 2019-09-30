@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 let development = process.env.NODE_ENV !== 'production'
-let hostName = development ? 'localhost:4000' : 'blooming-wildwood-45560.herokuapp.com'
+let hostName = true ? 'localhost:4000' : 'blooming-wildwood-45560.herokuapp.com'
 
 export default {
   env: {
@@ -25,18 +25,17 @@ export default {
     ]
   },
   server: {
-    // port: 3000,
-    // host: '0.0.0.0',
-    url: `https://${process.env.hostName}`,
+    port: 3000,
+    host: '0.0.0.0',
     https: {
       key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
     }
   },
   plugins: [
-    {src: '~/plugins/axios-port.ts'},
-    {src: '~/plugins/router-port.ts'},
-    {src: '~/plugins/nuxt-client-init.ts'}
+    {src: '~/plugins/axios-port.ts', ssr: false},
+    {src: '~/plugins/router-port.ts', ssr: false},
+    {src: '~/plugins/nuxt-client-init.ts', ssr: false}
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -55,7 +54,9 @@ export default {
     }]
   ],
   axios: {
-    baseURL: `https://${hostName}/api`,
+    host: 'localhost',
+    port: 4000,
+    prefix: '/api',
     ssr: false,
     proxyHeaders: false,
     credentials: false,
@@ -63,7 +64,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: 'https://blooming-wildwood-45560.herokuapp.com',
+      target: 'http://localhost:4000',
       pathRewrite: {'^/api/': '/api/'},
       changeOrigin: true
     }
