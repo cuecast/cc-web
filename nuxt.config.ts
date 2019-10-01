@@ -4,7 +4,7 @@ import path from "path";
 export default {
   env: {
     socketUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com`: 'cuecast-api.herokuapp.com',
-    baseUrl: process.env.NODE_ENV === 'production' ? `https://cuecast-api.herokuapp.com` : 'http://localhost:4000'
+    baseUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com` : 'http://localhost:4000'
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
@@ -52,8 +52,9 @@ export default {
     }]
   ],
   axios: {
-    host: 'https://cuecast-api.herokuapp.com',
+    host: 'cuecast.herokuapp.com',
     port: process.env.PORT,
+    https: true,
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
