@@ -1,12 +1,10 @@
 import fs from "fs";
 import path from "path";
 
-let development = process.env.NODE_ENV !== 'production'
-let hostName = true ? 'localhost:4000' : 'blooming-wildwood-45560.herokuapp.com'
-
 export default {
   env: {
-    hostName: hostName
+    socketUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com`: 'localhost:4001',
+    baseUrl: process.env.NODE_ENV === 'production' ? `https://cuecast-api.herokuapp.com` : 'https://localhost:4001'
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
@@ -26,16 +24,16 @@ export default {
   },
   server: {
     port: 3000,
-    host: '0.0.0.0',
+    host: 'localhost',
     https: {
       key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
     }
   },
   plugins: [
-    {src: '~/plugins/axios-port.ts', ssr: false},
-    {src: '~/plugins/router-port.ts', ssr: false},
-    {src: '~/plugins/nuxt-client-init.ts', ssr: false}
+    {src: '~/plugins/axios-port.ts'},
+    {src: '~/plugins/router-port.ts'},
+    {src: '~/plugins/nuxt-client-init.ts'}
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -55,7 +53,7 @@ export default {
   ],
   axios: {
     host: 'localhost',
-    port: 4000,
+    port: 3000,
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
@@ -64,7 +62,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: 'http://localhost:4000',
+      target: process.env.baseUrl || 'http://localhost:4000',
       pathRewrite: {'^/api/': '/api/'},
       changeOrigin: true
     }

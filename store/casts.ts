@@ -34,10 +34,7 @@ export class CastStore extends VuexModule {
   @action
   async addCast(params) {
     console.log('adding cast...')
-    api.$post('api/casts', {cast: params}).then(() => {
-      alert('success.')
-    })
-    // socket.addCast(params)
+    socket.addCast(params)
   }
 
   @action
