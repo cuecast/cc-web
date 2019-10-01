@@ -3,8 +3,8 @@ import path from "path";
 
 export default {
   env: {
-    socketUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com`: 'localhost:4001',
-    baseUrl: process.env.NODE_ENV === 'production' ? `https://cuecast-api.herokuapp.com` : 'https://localhost:4001'
+    socketUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com`: 'cuecast-api.herokuapp.com',
+    baseUrl: process.env.NODE_ENV === 'production' ? `https://cuecast-api.herokuapp.com` : 'http://localhost:4000'
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
@@ -52,8 +52,8 @@ export default {
     }]
   ],
   axios: {
-    host: 'localhost',
-    port: 3000,
+    host: 'https://cuecast-api.herokuapp.com',
+    port: process.env.PORT,
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
@@ -62,7 +62,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: process.env.baseUrl || 'http://localhost:4000',
+      target: 'https://cuecast-api.herokuapp.com',
       pathRewrite: {'^/api/': '/api/'},
       changeOrigin: true
     }
