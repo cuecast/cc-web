@@ -31,6 +31,7 @@ export default {
     }
   },
   plugins: [
+    {src: '~/plugins/axios.ts'},
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'}
@@ -51,23 +52,23 @@ export default {
       ]
     }]
   ],
-  axios: {
-    host: 'cuecast.herokuapp.com',
-    port: process.env.PORT,
-    https: true,
-    prefix: '/api',
-    ssr: false,
-    proxyHeaders: false,
-    credentials: false,
-    proxy: true
-  },
-  proxy: {
-    '/api/': {
-      target: 'https://cuecast-api.herokuapp.com',
-      pathRewrite: {'^/api/': '/api/'},
-      changeOrigin: true
-    }
-  },
+  // axios: {
+  //   host: 'cuecast.herokuapp.com',
+  //   port: process.env.PORT,
+  //   https: true,
+  //   prefix: '/api',
+  //   ssr: false,
+  //   proxyHeaders: false,
+  //   credentials: false,
+  //   proxy: true
+  // },
+  // proxy: {
+  //   '/api/': {
+  //     target: 'https://cuecast-api.herokuapp.com',
+  //     pathRewrite: {'^/api/': '/api/'},
+  //     changeOrigin: true
+  //   }
+  // },
   auth: {
     strategies: {
       local: {
