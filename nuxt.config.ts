@@ -1,10 +1,15 @@
 import fs from "fs";
 import path from "path";
 
+let development = process.env.NODE_ENV !== 'production'
+let hostName = development ? 'localhost:4000' : 'cuecast-alb-1030250719.ca-central-1.elb.amazonaws.com'
+console.log('=============================================')
+console.log(`hostName: ${hostName}`)
+console.log('=============================================')
+
 export default {
   env: {
-    socketUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com`: 'localhost:4001',
-    baseUrl: process.env.NODE_ENV === 'production' ? `https://cuecast-api.herokuapp.com` : 'https://localhost:4001'
+    baseUrl: hostName
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
@@ -24,7 +29,7 @@ export default {
   },
   server: {
     port: 3000,
-    host: 'localhost',
+    // host: '0.0.0.0',
     https: {
       key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
@@ -40,7 +45,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
+    // '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'bootstrap-vue/nuxt',
     ['nuxt-fontawesome', {
@@ -52,21 +57,18 @@ export default {
     }]
   ],
   axios: {
-    host: 'localhost',
-    port: 3000,
-    prefix: '/api',
+    baseURL: `https://cuecast-api.herokuapp.com/api/`,
     ssr: false,
     proxyHeaders: false,
     credentials: false,
-    proxy: true
   },
-  proxy: {
-    '/api/': {
-      target: process.env.baseUrl || 'https://localhost:4001',
-      pathRewrite: {'^/api/': '/api/'},
-      changeOrigin: true
-    }
-  },
+  // proxy: {
+  //   '/api/': {
+  //     target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
+  //     pathRewrite: {'^/api/': '/api/'},
+  //     changeOrigin: true
+  //   }
+  // },
   auth: {
     strategies: {
       local: {
