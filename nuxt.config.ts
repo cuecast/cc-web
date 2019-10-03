@@ -2,13 +2,21 @@ import fs from "fs";
 import path from "path";
 
 export default {
-  env: {},
+  env: {
+    socketUrl: process.env.NODE_ENV === 'production' ? `cuecast-api.herokuapp.com`: 'localhost:4001',
+    baseUrl: process.env.NODE_ENV === 'production' ? `https://cuecast-api.herokuapp.com` : 'https://localhost:4001'
+  },
+  buildModules: ['@nuxt/typescript-build'],
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true
+  },
   head: {
     title: "cuecast-web",
     meta: [
       {charset: "utf-8"},
       {name: "viewport", content: "width=device-width, initial-scale=1"},
-      {hid: "description", name: "description", content: "Nuxt.js TypeScript project"}
+      {hid: "description", name: "description", content: "CueCast"}
     ],
     link: [
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"}
@@ -16,7 +24,7 @@ export default {
   },
   server: {
     port: 3000,
-    host: '0.0.0.0',
+    host: 'localhost',
     https: {
       key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
@@ -45,7 +53,7 @@ export default {
   ],
   axios: {
     host: 'localhost',
-    port: 4000,
+    port: 3000,
     prefix: '/api',
     ssr: false,
     proxyHeaders: false,
@@ -53,7 +61,11 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: 'cuecast-api.herokuapp.com', pathRewrite: {'^/api/': '/api/'}, changeOrigin: true }
+    '/api/': {
+      target: process.env.baseUrl || 'https://localhost:4001',
+      pathRewrite: {'^/api/': '/api/'},
+      changeOrigin: true
+    }
   },
   auth: {
     strategies: {
