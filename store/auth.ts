@@ -1,9 +1,10 @@
-import { action, mutation, VuexModule } from "~/store/cuecast-store";
+import { action, Module, mutation, VuexModule } from "~/store/cuecast-store";
 import { User } from "~/types";
 import { api, auth, router } from "~/utils";
 
 declare var $nuxt: any;
 
+@Module({namespacedPath: 'auth'})
 export class AuthStore extends VuexModule {
   currentUser: User = {
     id: 0,

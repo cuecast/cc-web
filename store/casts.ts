@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { action, mutation, VuexModule } from "~/store/cuecast-store";
+import { action, mutation, VuexModule, Module } from "~/store/cuecast-store";
 import CuecastSocket from '../channels/cuecast-socket'
 import { api } from '~/utils'
 import { Cast } from "~/types";
@@ -8,6 +8,7 @@ import { Cast } from "~/types";
 let socket: CuecastSocket;
 declare var $nuxt: any;
 
+@Module({namespacedPath: 'casts'})
 export class CastStore extends VuexModule {
   casts: Cast[] = <Cast[]>[{name: 'hello'}, {name: 'world'}]
 
@@ -34,10 +35,7 @@ export class CastStore extends VuexModule {
   @action
   async addCast(params) {
     console.log('adding cast...')
-    api.$post('casts', {cast: params}).then(() => {
-      alert('success.')
-    })
-    // socket.addCast(params)
+    socket.addCast(params)
   }
 
   @action

@@ -1,10 +1,11 @@
-import { action, VuexModule } from "~/store/cuecast-store";
+import { action, Module, VuexModule } from "~/store/cuecast-store";
 import StreamSocket from '~/channels/stream-socket'
 import { EXCHANGE, JOIN_CALL, LEAVE_CALL } from "~/utils/rtc";
 import { vxm } from "~/store";
 
 let socket: StreamSocket;
 
+@Module({namespacedPath: 'streams'})
 export class StreamStore extends VuexModule {
   localStream: any = {}
   peers: any = {}

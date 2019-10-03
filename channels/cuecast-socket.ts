@@ -7,7 +7,7 @@ export default class CuecastSocket {
   static socket: Socket;
 
   constructor() {
-    let socketUrl = `wss://cuecast.herokuapp.com/socket`
+    let socketUrl = `wss://${process.env.socketUrl}/socket`
     console.log(socketUrl)
     let socket = new Socket(socketUrl)
     socket.connect()
