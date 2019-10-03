@@ -9,7 +9,7 @@ console.log('=============================================')
 
 export default {
   env: {
-    baseUrl: hostName
+    baseUrl: hostName,
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
