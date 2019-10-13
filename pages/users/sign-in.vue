@@ -1,52 +1,53 @@
 <template>
   <div>
-    <b-card
-      class="mb-2"
-      img-alt="Image"
-      img-src="https://picsum.photos/id/13/600/300"
-      img-top
-      style="max-width: 20rem;"
-      tag="article"
-      title="Sign In">
-      <b-form-group
-        label="Email">
-        <b-form-input
-          placeholder="Enter email"
-          required
-          type="email"
-          v-model="email">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="Password">
-        <b-form-input
-          placeholder="Enter email"
-          required
-          type="password"
-          v-model="password">
-        </b-form-input>
-      </b-form-group>
-      <b-button @click="authStore.signIn({email: email, password: password})" class="float-right" variant="primary">
-        Submit
-      </b-button>
 
-      <b-link to="/users/sign-up">Register</b-link>
-    </b-card>
-    <div v-if="authStore.currentUser">
-      Current User: {{authStore.currentUser.email}}
+    <h1 class="title">CueCast</h1>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-right">
+        <input class="input" type="text" v-model="form.email">
+        <span class="icon is-small is-right"> <i class="fa fa-user"></i> </span>
+      </div>
     </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control has-icons-right">
+        <input class="input" type="password" v-model="form.password">
+        <span class="icon is-small is-right"> <i class="fa fa-key"></i> </span>
+      </div>
+    </div>
+
+    <div class="has-text-centered">
+      <a @click="authStore.signIn(form)"
+         class="button is-vcentered is-primary is-outlined">Login</a>
+    </div>
+
+    <div class="has-text-centered">
+      <nuxt-link to="/users/sign-up"> Don't have an account? Click here to sign up.</nuxt-link>
+    </div>
+
   </div>
 </template>
 
 <script lang="ts">
-import { AuthStore, vxm } from "~/store"
+import { AuthStore, CastStore, vxm } from "~/store"
 import { Component, Vue } from "nuxt-property-decorator"
 
-@Component
+interface Form {
+  email: string;
+  password: string;
+}
+
+@Component({layout: 'sign-in'})
 export default class extends Vue {
+  castStore: CastStore = vxm.casts
   authStore: AuthStore = vxm.auth
-  email: string = '';
-  password: string = '';
+  form: Form = {
+    email: 'tom@1.com',
+    password: 'element9'
+  }
 }
 </script>
 

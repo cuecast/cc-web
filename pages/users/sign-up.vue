@@ -1,53 +1,39 @@
 <template>
   <div>
-    <b-card
-      class="mb-2"
-      img-alt="Image"
-      img-src="https://picsum.photos/id/13/600/300"
-      img-top
-      style="max-width: 20rem;"
-      tag="article"
-      title="Sign Up">
-      <b-form-group
-        label="Email">
-        <b-form-input
-          placeholder="Enter email"
-          required
-          type="email"
-          v-model="form.email">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="Password">
-        <b-form-input
-          placeholder="Enter password"
-          required
-          type="password"
-          v-model="form.passwordConfirmation">
-        </b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="Confirm Password">
-        <b-form-input
-          placeholder="Confirm password"
-          required
-          type="password"
-          v-model="form.password">
-        </b-form-input>
-      </b-form-group>
-      <b-button
-        @click="authStore.signUp(form)"
-        class="float-right" variant="primary">
-        Submit
-      </b-button>
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-right">
+        <input class="input" type="text" v-model="form.email">
+        <span class="icon is-small is-right"> <i class="fa fa-user"></i> </span>
+      </div>
+    </div>
 
-      <b-link to="/users/sign-up"></b-link>
-    </b-card>
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control has-icons-right">
+        <input class="input" type="password" v-model="form.password">
+        <span class="icon is-small is-right"> <i class="fa fa-key"></i> </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Confirm Password</label>
+      <div class="control has-icons-right">
+        <input class="input" type="password" v-model="form.passwordConfirmation">
+        <span class="icon is-small is-right"> <i class="fa fa-key"></i> </span>
+      </div>
+    </div>
+
+
+    <div class="has-text-centered">
+      <a @click="authStore.signUp(form)"
+         class="button is-vcentered is-primary is-outlined">Register</a>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { AuthStore, vxm } from "~/store"
+import { AuthStore, CastStore, vxm } from "~/store"
 import { Component, Vue } from "nuxt-property-decorator"
 
 interface Form {
@@ -58,6 +44,7 @@ interface Form {
 
 @Component
 export default class extends Vue {
+  castStore: CastStore = vxm.casts
   authStore: AuthStore = vxm.auth
   form: Form = {
     email: '',

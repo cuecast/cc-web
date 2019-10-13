@@ -1,24 +1,32 @@
 <template>
+
   <div class="card">
-    <div class="card-body">
-      <h2>Cast List</h2>
-      <hr>
-      <b-list-group>
-        <b-list-group-item :key="cast.id" v-for="cast in casts">
-          <div class="float-left">
-            {{cast.id}} - {{cast.name}}
-          </div>
-          <div class="float-right">
-            <button @click="removeCast(cast)">X</button>
-          </div>
-        </b-list-group-item>
-      </b-list-group>
+    <div class="card-content">
+      <article class="media" v-for="cast in castStore.casts">
+        <div class="media-content">
+          <nav class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <p>
+                  {{cast.id}} {{cast.name}}
+                </p>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="level-item">
+                <button @click="castStore.removeCast(cast)" class="button is-danger">Delete that shit</button>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </article>
     </div>
   </div>
+
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "nuxt-property-decorator"
+import { Component, Prop, Vue } from "nuxt-property-decorator"
 import { Cast } from "~/types"
 import { CastStore, vxm } from '~/store'
 

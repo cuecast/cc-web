@@ -10,12 +10,12 @@ Vue.use(Vuex)
 
 
 export const state = () => ({
-  auth: {
-    user: {
-      id: '',
-      email: ''
-    }
-  }
+  // auth: {
+  //   user: {
+  //     id: '',
+  //     email: ''
+  //   }
+  // }
 })
 
 export const actions = {
@@ -24,9 +24,9 @@ export const actions = {
 }
 
 export const mutations = {
-  setUser(state, user) {
-    state.auth.user = user
-  }
+  // setUser(state, user) {
+  //   state.auth.user = user
+  // }
 }
 
 export const store = new Vuex.Store({

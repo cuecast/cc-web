@@ -21,8 +21,8 @@ export class AuthStore extends VuexModule {
     await auth.login({
       data: {...params}
     }).then(() => {
-      this.setCurrentUser()
       router.push('/')
+      this.setCurrentUser()
     })
   }
 
@@ -37,12 +37,10 @@ export class AuthStore extends VuexModule {
       user: {...params}
     }).then(() => {
       this.setCurrentUser()
-      router.push('/')
     })
   }
 
   @mutation setCurrentUser() {
-    this.currentUser = $nuxt.$auth.$state.user
+    this.currentUser = $nuxt.$auth.user
   }
-
 }

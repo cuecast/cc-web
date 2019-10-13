@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Casts</h1>
+    <h1 class="title">Casts</h1>
     <hr>
     <cast-form />
     <br>
@@ -16,6 +16,7 @@ import CastForm from "~/components/casts/CastForm.vue"
 import { CastStore, vxm } from "~/store"
 
 @Component({
+  middleware: 'auth',
   components: {CastList, CastForm}
 })
 export default class extends Vue {

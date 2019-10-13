@@ -1,6 +1,6 @@
 <template>
   <div v-if="$auth.loggedIn">
-    <h1>{{authStore.currentUser.email}}</h1>
+    <h1>{{authStore.user.email}}</h1>
   </div>
 </template>
 

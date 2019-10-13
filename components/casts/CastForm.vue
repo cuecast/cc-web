@@ -1,27 +1,27 @@
 <template>
+
   <div class="card">
-    <div class="card-body">
-      <h2>Cast Form</h2>
-      <hr>
+    <div class="card-content">
+      <p class="title">
+        Add a Cast
+      </p>
+      <p class="subtitle">
+        testing websockets w/ phoenix
+      </p>
 
-      <b-form-group id="cast-name" label="Cast Name:" label-for="cast-name">
-        <b-form-input
-          id="cast-name"
-          placeholder="Enter name"
-          required
-          v-model="form.name"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group>
-        <b-btn @click="castStore.addCast(form)">Submit</b-btn>
-      </b-form-group>
+      <b-field label="Name">
+        <b-input v-model="form.name"></b-input>
+      </b-field>
     </div>
+    <footer class="card-footer">
+      <a @click="castStore.addCast(form)" class="card-footer-item">Submit</a>
+    </footer>
   </div>
+
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Component, Vue } from "nuxt-property-decorator"
 import { CastStore, vxm } from "~/store"
 
 @Component

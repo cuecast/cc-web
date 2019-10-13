@@ -9,7 +9,7 @@ console.log('=============================================')
 
 export default {
   env: {
-    baseUrl: hostName,
+    // baseUrl: hostName,
   },
   buildModules: ['@nuxt/typescript-build'],
   typescript: {
@@ -30,10 +30,10 @@ export default {
   server: {
     port: 3000,
     // host: '0.0.0.0',
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
-    }
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5-key.pem')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, '10.0.93.162+5.pem')),
+    // }
   },
   plugins: [
     {src: '~/plugins/axios-port.ts'},
@@ -47,7 +47,7 @@ export default {
     '@nuxtjs/axios',
     // '@nuxtjs/proxy',
     '@nuxtjs/auth',
-    'bootstrap-vue/nuxt',
+    'nuxt-buefy',
     ['nuxt-fontawesome', {
       component: 'fa',
       imports: [
@@ -57,18 +57,12 @@ export default {
     }]
   ],
   axios: {
-    baseURL: `https://cuecast-api.herokuapp.com/api/`,
-    ssr: false,
+    baseURL: `http://localhost:4000/api`,
+    // ssr: false,
+    debug: true,
     proxyHeaders: false,
     credentials: false,
   },
-  // proxy: {
-  //   '/api/': {
-  //     target: (development ? 'https://localhost:3000' : 'https://master.d3gdo8t508ooot.amplifyapp.com/'),
-  //     pathRewrite: {'^/api/': '/api/'},
-  //     changeOrigin: true
-  //   }
-  // },
   auth: {
     strategies: {
       local: {
@@ -77,17 +71,16 @@ export default {
           logout: {url: '/users/sign_out', method: 'delete'},
           user: {url: '/users/current', propertyName: false}
         },
-        tokenRequired: true,
-        tokenType: 'Bearer',
       }
     },
     redirect: {
-      login: '/users/sign-in',
-      home: '/users/profile'
+      login: '/stream',
+      logout: '/users/sign-in',
+      callback: '/users/sign-in',
+      home: '/stream'
     },
     plugins: [
       '~/plugins/auth-port.ts'
     ]
   }
-
 }
