@@ -7,7 +7,8 @@ export default class CuecastSocket {
   static socket: Socket;
 
   constructor() {
-    let socketUrl = process.env.SOCKET_URL || 'wss://localhost:4001/socket'
+    // let socketUrl = process.env.SOCKET_URL || 'wss://localhost:4001/socket'
+    let socketUrl = 'wss://cuecast-api.herokuapp.com/socket'
     console.log(socketUrl)
     let socket = new Socket(socketUrl)
     
