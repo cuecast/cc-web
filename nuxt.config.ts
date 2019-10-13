@@ -49,7 +49,7 @@ export default {
     }]
   ],
   axios: {
-    baseURL: `https://cuecast-api.herokuapp.com:4000/api`,
+    baseURL: `https://cuecast-api.herokuapp.com/api`,
     // ssr: false,
     debug: true,
     proxyHeaders: false,
