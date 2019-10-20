@@ -2,7 +2,9 @@
   <div>
     <c-header />
     <div class="container">
-      <nuxt />
+      <section class="section">
+        <nuxt />
+      </section>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <b-navbar style="margin-bottom: 2rem">
+  <b-navbar style="margin-bottom: 2rem;  box-shadow:0px 1px 4px #eee;">
     <template slot="brand">
       <b-navbar-item tag="nuxt-link" to="/">
         <strong class="is-size-5">CueCast</strong>
@@ -16,7 +16,7 @@
         <b-navbar-item href="#">
           About
         </b-navbar-item>
-        <b-navbar-item href="#">
+        <b-navbar-item>
           Contact
         </b-navbar-item>
       </b-navbar-dropdown>
@@ -37,9 +37,11 @@
           Logged in as <b>{{$auth.user.email}}</b>
         </b-dropdown-item>
         <hr class="dropdown-divider">
-        <b-dropdown-item value="settings">
-          <b-icon icon="settings"></b-icon>
-          Settings
+        <b-dropdown-item has-link>
+          <n-link to="/users/profile">
+            <b-icon icon="account"></b-icon>
+            Profile
+          </n-link>
         </b-dropdown-item>
         <b-dropdown-item @click="$auth.logout()" aria-role="menuitem" value="logout">
           <b-icon icon="logout"></b-icon>
@@ -48,12 +50,12 @@
       </b-dropdown>
       <b-navbar-item v-else>
         <div class="buttons">
-          <nuxt-link class="button is-primary" to="/users/sign-up">
+          <n-link class="button is-primary" to="/users/sign-up">
             <strong>Sign Up</strong>
-          </nuxt-link>
-          <nuxt-link class="button is-light" to="/users/sign-in">
+          </n-link>
+          <n-link class="button is-light" to="/users/sign-in">
             Sign In
-          </nuxt-link>
+          </n-link>
         </div>
       </b-navbar-item>
     </template>

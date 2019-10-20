@@ -10,8 +10,8 @@ export default class StreamSocket {
   channel!: Channel;
 
   constructor () {
-    // let socketUrl = process.env.SOCKET_URL || 'wss://localhost:4001/socket';
-    let socketUrl = 'wss://cuecast-api.herokuapp.com/socket'
+    let socketUrl = process.env.SOCKET_URL || 'wss://localhost:4001/socket';
+    // let socketUrl = 'wss://cuecast-api.herokuapp.com/socket'
     let socket = new Socket(socketUrl);
     socket.connect();
     this.channel = socket.channel('stream:main', {});

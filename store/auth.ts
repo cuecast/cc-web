@@ -11,28 +11,28 @@ export class AuthStore extends VuexModule {
     email: ''
   };
 
-  get user() {
-    this.setCurrentUser()
+  get user () {
+    this.setCurrentUser();
     return this.currentUser
   }
 
   @action
-  async signIn(params) {
+  async signIn (params) {
     await auth.login({
       data: {...params}
     }).then(() => {
-      router.push('/')
+      router.push('/');
       this.setCurrentUser()
     })
   }
 
   @action
-  async signOut() {
+  async signOut () {
     await auth.logout()
   }
 
   @action
-  async signUp(params) {
+  async signUp (params) {
     await api.post('/users', {
       user: {...params}
     }).then(() => {
@@ -40,7 +40,13 @@ export class AuthStore extends VuexModule {
     })
   }
 
-  @mutation setCurrentUser() {
+  @action
+  async googleSignIn () {
+    window.location.href = 'http://localhost:4000/api/auth/google?scope=email%20profile'
+  }
+
+
+  @mutation setCurrentUser () {
     this.currentUser = $nuxt.$auth.user
   }
 }

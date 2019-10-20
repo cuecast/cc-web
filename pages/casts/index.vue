@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
+import { Component, Vue } from "nuxt-property-decorator"
 import CastList from "~/components/casts/CastList.vue"
 import CastForm from "~/components/casts/CastForm.vue"
 
