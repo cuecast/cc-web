@@ -69,9 +69,14 @@ export default {
         endpoints: {
           login: {url: '/users/sign_in'},
           logout: {url: '/users/sign_out', method: 'delete'},
-          user: {url: '/users/current', propertyName: false}
+          user: {url: '/users/current'}
         },
-      }
+      },
+      google: {
+        client_id: '1093614674363-621bn6aavnrt0s64v725aj1qpe6n8rqu.apps.googleusercontent.com',
+        user:false,
+        redirect_uri:'http://localhost:4000/api/users/auth/google_oauth2',
+      },
     },
     redirect: {
       login: '/stream',
@@ -80,7 +85,8 @@ export default {
       home: '/stream'
     },
     plugins: [
-      '~/plugins/auth-port.ts'
+      // '~/plugins/auth-port.ts',
+      '~/plugins/auth.ts'
     ]
   }
 }

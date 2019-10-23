@@ -1,6 +1,6 @@
 import { action, Module, mutation, VuexModule } from "~/store/cuecast-store";
 import { User } from "~/types";
-import { api, auth, router } from "~/utils";
+import { api, auth } from "~/utils";
 
 declare var $nuxt: any;
 
@@ -18,11 +18,13 @@ export class AuthStore extends VuexModule {
 
   @action
   async signIn (params) {
-    await auth.login({
-      data: {...params}
-    }).then(() => {
-      router.push('/');
-      this.setCurrentUser()
+    await auth.loginWith('local', {
+      data: {
+        user: {
+          email: params.email,
+          password: params.password
+        }
+      }
     })
   }
 
@@ -42,7 +44,7 @@ export class AuthStore extends VuexModule {
 
   @action
   async googleSignIn () {
-    window.location.href = 'http://localhost:4000/api/auth/google?scope=email%20profile'
+    await $nuxt.$auth.loginWith('google')
   }
 
 
