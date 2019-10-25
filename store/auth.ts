@@ -6,15 +6,15 @@ declare var $nuxt: any;
 
 @Module({namespacedPath: 'auth'})
 export class AuthStore extends VuexModule {
-  currentUser: User = {
-    id: 0,
-    email: ''
-  };
-
-  get user () {
-    this.setCurrentUser();
-    return this.currentUser
-  }
+  // currentUser: User = {
+  //   id: 0,
+  //   email: ''
+  // };
+  //
+  // get user () {
+  //   // this.setCurrentUser();
+  //   return this.currentUser
+  // }
 
   @action
   async signIn (params) {
@@ -38,7 +38,7 @@ export class AuthStore extends VuexModule {
     await api.post('/users', {
       user: {...params}
     }).then(() => {
-      this.setCurrentUser()
+      // this.setCurrentUser()
     })
   }
 

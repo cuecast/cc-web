@@ -1,20 +1,19 @@
-export default async function({app, store}) {
+export default async function({$auth, $axios}) {
   console.log('auth executed');
-  if (!store.loggedIn) {
-    debugger
+  if (!$auth.loggedIn) {
     return;
   }
 
-  const auth = app.$auth;
+  const auth = $auth;
 
   const authStrategy = auth.strategy.name;
   if (authStrategy === 'facebook' || authStrategy === 'google') {
     const token = auth.getToken(authStrategy).substr(7);
     const authStrategyConverted = authStrategy === 'facebook' ? 'fb' : 'google';
-    const url = `/user/signup/${authStrategyConverted}?token=${token}`;
+    const url = `/users/auth/google_oauth2?token=${token}`;
 
     try {
-      const {data} = await app.$axios.$post(url, null);
+      const {data} = await $axios.$post(url, null);
       auth.setToken('local', 'Bearer ' + data.access_token);
       setTimeout(async () => {
         auth.setStrategy('local');

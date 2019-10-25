@@ -39,7 +39,7 @@ export default {
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
-    {src: '~/plugins/auth.client.js', mode: 'client'},
+    // {src: '~/plugins/auth.js', mode: 'client'}
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -68,26 +68,26 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: {url: '/users/sign_in'},
+          login: {url: '/users/sign_in', propertyName: 'token.accessToken'},
           logout: {url: '/users/sign_out', method: 'delete'},
           user: {url: '/users/current'}
         },
       },
       google: {
         client_id: '1093614674363-621bn6aavnrt0s64v725aj1qpe6n8rqu.apps.googleusercontent.com',
-        user:false,
-        redirect_uri:'http://localhost:4000/api/users/auth/google_oauth2',
+        redirect_uri: 'http://localhost:3000/login',
       },
     },
-    redirect: {
-      login: '/stream',
-      logout: '/users/sign-in',
-      callback: '/users/sign-in',
-      home: '/stream'
-    },
+    // redirect: {
+    //   login: '/stream',
+    //   logout: '/users/sign-in',
+    //   callback: '/users/sign-in',
+    //   home: '/stream'
+    // },
     plugins: [
       // '~/plugins/auth-port.ts',
       // '~/plugins/auth.ts'
+      '~/plugins/auth.ts',
     ]
   }
 }

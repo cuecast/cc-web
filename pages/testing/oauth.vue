@@ -11,10 +11,10 @@ import { AuthStore, vxm } from '~/store';
 
 @Component
 export default class extends Vue {
-  async google () {
-    // await this.$auth.loginWith('google').catch(e => {
+  google () {
+    this.$auth.loginWith('google').catch(e => {
       alert("EROR: " )
-    // })
+    })
   }
 }
 </script>
