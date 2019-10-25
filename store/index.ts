@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 
 import { CastStore, StreamStore, AuthStore } from "~/store";
 import { createProxy, extractVuexModule } from "./cuecast-store";
-import auth from "~/utils/auth";
 
 Vue.use(Vuex)
 

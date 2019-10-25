@@ -38,7 +38,8 @@ export default {
   plugins: [
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
-    {src: '~/plugins/nuxt-client-init.ts'}
+    {src: '~/plugins/nuxt-client-init.ts'},
+    {src: '~/plugins/auth.client.js', mode: 'client'},
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -86,7 +87,7 @@ export default {
     },
     plugins: [
       // '~/plugins/auth-port.ts',
-      '~/plugins/auth.ts'
+      // '~/plugins/auth.ts'
     ]
   }
 }

@@ -1,6 +1,6 @@
 import { action, Module, mutation, VuexModule } from "~/store/cuecast-store";
 import { User } from "~/types";
-import { api, auth } from "~/utils";
+import { api } from "~/utils";
 
 declare var $nuxt: any;
 
@@ -18,7 +18,7 @@ export class AuthStore extends VuexModule {
 
   @action
   async signIn (params) {
-    await auth.loginWith('local', {
+    await $nuxt.$auth.loginWith('local', {
       data: {
         user: {
           email: params.email,
@@ -30,7 +30,7 @@ export class AuthStore extends VuexModule {
 
   @action
   async signOut () {
-    await auth.logout()
+    await $nuxt.$auth.logout()
   }
 
   @action
@@ -49,6 +49,6 @@ export class AuthStore extends VuexModule {
 
 
   @mutation setCurrentUser () {
-    this.currentUser = $nuxt.$auth.user
+    // this.currentUser = $nuxt.$auth.user
   }
 }
