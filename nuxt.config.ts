@@ -46,7 +46,7 @@ export default {
   build: {},
   modules: [
     '@nuxtjs/axios',
-    // '@nuxtjs/proxy',
+    '@nuxtjs/proxy',
     '@nuxtjs/auth',
     'nuxt-buefy',
     ['nuxt-fontawesome', {
@@ -64,6 +64,14 @@ export default {
     proxyHeaders: false,
     credentials: false,
   },
+  proxy: {
+    '/api': {
+      target: 'http://localhost:4000',
+      pathRewrite: {
+        '^/api' : '/api'
+      }
+    }
+  },
   auth: {
     strategies: {
       local: {
@@ -76,6 +84,9 @@ export default {
       google: {
         client_id: '1093614674363-621bn6aavnrt0s64v725aj1qpe6n8rqu.apps.googleusercontent.com',
         redirect_uri: 'http://localhost:3000/login',
+        response_type: 'code',
+        access_type: 'offline',
+        access_token_endpoint: 'http://localhost:3000/api/users/auth/google_oauth2/callback'
       },
     },
     // redirect: {

@@ -20,8 +20,8 @@
     </div>
 
     <div class="has-text-centered">
-      <a @click="authStore.signIn(form)"
-         class="button is-vcentered is-primary is-outlined">Login</a>
+      <a @click="authStore.signIn(form)" class="button is-vcentered is-primary is-outlined">Sign In</a>
+      <a @click="authStore.googleSignIn()" class="button is-vcentered is-primary is-outlined">Sign In with Google</a>
     </div>
 
     <div class="has-text-centered">
