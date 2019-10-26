@@ -2,10 +2,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { CastStore, StreamStore, AuthStore } from "~/store";
+import { AuthStore, CallStore, CastStore, StreamStore } from "~/store";
 import { createProxy, extractVuexModule } from "./cuecast-store";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 
 export const state = () => ({
@@ -15,18 +15,18 @@ export const state = () => ({
   //     email: ''
   //   }
   // }
-})
+});
 
 export const actions = {
-  nuxtServerInit({commit}, {context}) {
+  nuxtServerInit ({commit}, {context}) {
   },
-}
+};
 
 export const mutations = {
   // setUser(state, user) {
   //   state.auth.user = user
   // }
-}
+};
 
 export const store = new Vuex.Store({
   state: state(),
@@ -34,18 +34,21 @@ export const store = new Vuex.Store({
     ...extractVuexModule(AuthStore),
     ...extractVuexModule(CastStore),
     ...extractVuexModule(StreamStore),
+    ...extractVuexModule(CallStore),
   },
   actions: actions,
   mutations: mutations
-})
+});
 
 export { AuthStore } from "./auth";
 export { CastStore } from "./casts";
 export { StreamStore } from "./streams";
+export { CallStore } from "./calls";
 
 export const vxm = {
   auth: createProxy(store, AuthStore),
   casts: createProxy(store, CastStore),
   streams: createProxy(store, StreamStore),
-}
+  calls: createProxy(store, CallStore),
+};
 

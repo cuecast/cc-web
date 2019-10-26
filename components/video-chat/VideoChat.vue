@@ -54,11 +54,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator"
-import { StreamStore, vxm } from "~/store"
+import { CallStore, vxm } from "~/store"
 
 @Component
 export default class extends Vue {
-  streamStore: StreamStore = vxm.streams
+  streamStore: CallStore = vxm.calls
   $refs!: {
     localVideo: HTMLVideoElement
     remoteVideo: HTMLVideoElement

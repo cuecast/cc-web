@@ -23,7 +23,8 @@
     "types": [
       "@nuxt/types",
       "@types/node",
-      "@types/webpack-env"
+      "@types/webpack-env",
+      "@types/actioncable"
     ]
   }
 }

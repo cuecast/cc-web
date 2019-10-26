@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-
 let development = process.env.NODE_ENV !== 'production'
 let hostName = development ? 'localhost:4000' : 'cuecast-alb-1030250719.ca-central-1.elb.amazonaws.com'
 console.log('=============================================')
@@ -39,7 +36,7 @@ export default {
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
-    // {src: '~/plugins/auth.js', mode: 'client'}
+    {src: '~/plugins/actioncable.client.ts'}
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -68,7 +65,7 @@ export default {
     '/api': {
       target: 'http://localhost:4000',
       pathRewrite: {
-        '^/api' : '/api'
+        '^/api': '/api'
       }
     }
   },
@@ -95,10 +92,5 @@ export default {
     //   callback: '/users/sign-in',
     //   home: '/stream'
     // },
-    plugins: [
-      // '~/plugins/auth-port.ts',
-      // '~/plugins/auth.ts'
-      '~/plugins/auth.ts',
-    ]
   }
 }
