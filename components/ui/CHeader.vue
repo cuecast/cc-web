@@ -13,8 +13,10 @@
         Casts
       </b-navbar-item>
       <b-navbar-dropdown label="Info">
-        <b-navbar-item href="#">
-          About
+        <b-navbar-item>
+          <n-link to="/testing/random">
+            Random
+          </n-link>
         </b-navbar-item>
         <b-navbar-item>
           Contact

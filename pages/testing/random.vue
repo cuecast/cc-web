@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Logging In with Oauth...</h1>
+    Grabbing stuff from Rails API
   </div>
 </template>
 
@@ -9,8 +9,10 @@ import { Vue, Component } from "nuxt-property-decorator"
 
 @Component
 export default class extends Vue {
-  created() {
-    this.$router.push('/testing/random')
+  mounted() {
+    this.$axios.$get('calls').then((res) => {
+      debugger
+    })
   }
 }
 </script>

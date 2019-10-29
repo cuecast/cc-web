@@ -75,7 +75,7 @@ export default {
         endpoints: {
           login: {url: '/users/sign_in', propertyName: 'token.accessToken'},
           logout: {url: '/users/sign_out', method: 'delete'},
-          user: {url: '/users/current'}
+          user: {url: '/users/current', propertyName: 'user'}
         },
       },
       google: {
