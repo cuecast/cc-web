@@ -36,7 +36,7 @@ export default {
     {src: '~/plugins/axios-port.ts'},
     {src: '~/plugins/router-port.ts'},
     {src: '~/plugins/nuxt-client-init.ts'},
-    {src: '~/plugins/actioncable.client.ts'}
+    {src: '~/plugins/actioncable.client.ts'},
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],
@@ -81,11 +81,27 @@ export default {
       google: {
         client_id: '1093614674363-621bn6aavnrt0s64v725aj1qpe6n8rqu.apps.googleusercontent.com',
         redirect_uri: 'http://localhost:3000/login',
+        user: false,
         response_type: 'code',
         access_type: 'offline',
         access_token_endpoint: 'http://localhost:3000/api/users/auth/google_oauth2/callback'
       },
+      cuecast: {
+        _scheme: 'oauth2',
+        authorization_endpoint: 'https://accounts.google.com/o/oauth2/auth',
+        // userinfo_endpoint: 'https://www.googleapis.com/oauth2/v3/userinfo',
+        // scope: ['openid', 'profile', 'email'],
+        // access_type: undefined,
+        // access_token_endpoint: undefined,
+        response_type: 'token',
+        token_type: 'Bearer',
+        redirect_uri: undefined,
+        client_id: 'awMipzEEgAKtTrpG0Kebg2sX6KSSa1MbA386eR9xwoo',
+        token_key: 'access_token',
+        state: 'UNIQUE_AND_NON_GUESSABLE'
+      },
     },
+    plugins: ['~/plugins/auth.ts']
     // redirect: {
     //   login: '/stream',
     //   logout: '/users/sign-in',
