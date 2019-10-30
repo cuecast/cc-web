@@ -17,38 +17,35 @@ export class AuthStore extends VuexModule {
   // }
 
   @action
-  async signIn (params) {
-    await $nuxt.$auth.loginWith('local', {
-      data: {
-        user: {
-          email: params.email,
-          password: params.password
-        }
-      }
+  async signIn(params) {
+    await $nuxt.$auth.login({
+      email: params.email,
+      password: params.password
     })
   }
 
   @action
-  async signOut () {
+  async signOut() {
     await $nuxt.$auth.logout()
   }
 
   @action
-  async signUp (params) {
+  async signUp(params) {
     await api.post('/users', {
-      user: {...params}
+      email: params.email,
+      password: params.password
     }).then(() => {
       // this.setCurrentUser()
     })
   }
 
   @action
-  async googleSignIn () {
+  async googleSignIn() {
     await $nuxt.$auth.loginWith('google')
   }
 
 
-  @mutation setCurrentUser () {
+  @mutation setCurrentUser() {
     // this.currentUser = $nuxt.$auth.user
   }
 }

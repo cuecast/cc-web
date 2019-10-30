@@ -47,9 +47,9 @@ export default class extends Vue {
   castStore: CastStore = vxm.casts
   authStore: AuthStore = vxm.auth
   form: Form = {
-    email: '',
-    password: '',
-    passwordConfirmation: ''
+    email: 'blur606@gmail.com',
+    password: 'element9',
+    passwordConfirmation: 'element9'
   }
 }
 </script>
