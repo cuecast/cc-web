@@ -73,8 +73,8 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: {url: '/users/sign_in', propertyName: 'token.accessToken'},
-          logout: {url: '/users/sign_out', method: 'delete'},
+          login: {url: '/auth/sign_in'},
+          logout: {url: '/auth/sign_out', method: 'delete'},
           user: {url: '/users/current', propertyName: 'user'}
         },
       },

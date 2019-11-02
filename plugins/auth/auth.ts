@@ -1,28 +1,28 @@
 import Storage from './storage'
-import LocalScheme from "~/plugins/auth/schemes/local";
-import { routeOption } from "~/plugins/auth/utilities";
+import LocalScheme from '~/plugins/auth/schemes/local'
+import { routeOption } from '~/plugins/auth/utilities'
 
 export default class Auth {
 
-  ctx: any;
-  error: null;
-  options: any;
-  $storage: any;
-  $state: any;
-  $axios: any;
-  $redirect: any;
-  strategies: any = {};
-  authHeaders: any = ['access-token', 'client', 'uid', 'expiry'];
+  ctx: any
+  error: null
+  options: any
+  $storage: any
+  $state: any
+  $axios: any
+  $redirect: any
+  strategies: any = {}
+  authHeaders: any = ['access-token', 'client', 'uid', 'expiry']
 
   constructor(ctx) {
-    this.ctx = ctx;
-    this.$axios = this.ctx.app.$axios;
+    this.ctx = ctx
+    this.$axios = this.ctx.app.$axios
 
-    const storage = new Storage(ctx);
+    const storage = new Storage(ctx)
 
-    this.$redirect = this.ctx.redirect;
-    this.$storage = storage;
-    this.$state = storage.state;
+    this.$redirect = this.ctx.redirect
+    this.$storage = storage
+    this.$state = storage.state
 
     this.options = {
       prefix: 'auth.',
@@ -31,10 +31,10 @@ export default class Auth {
         profile: '/users/profile',
         test: '/testing/random',
       }
-    };
+    }
 
-    this.strategies = {};
-    this.strategies['local'] = new LocalScheme(this.ctx);
+    this.strategies = {}
+    this.strategies['local'] = new LocalScheme(this.ctx)
     // this.strategies['google'] = new GoogleScheme(this.ctx);
   }
 
@@ -51,11 +51,11 @@ export default class Auth {
   }
 
   async init() {
-    this.$storage.syncUniversal('strategy', 'local');
+    this.$storage.syncUniversal('strategy', 'local')
     //
     // // Set default strategy if current one is invalid
     if (!this.strategy) {
-      this.$storage.setUniversal('strategy', 'login');
+      this.$storage.setUniversal('strategy', 'login')
 
       // Give up if still invalid
       if (!this.strategy) {
@@ -80,29 +80,29 @@ export default class Auth {
   }
 
   login(name, args) {
-    this.setStrategy(name);
+    this.setStrategy(name)
 
-    this.$storage.setState('busy', true);
-    this.error = null;
+    this.$storage.setState('busy', true)
+    this.error = null
 
     this.strategy.login(args)
 
   }
 
   logout() {
-    this.$storage.setState('busy', true);
+    this.$storage.setState('busy', true)
 
     return Promise.resolve(this.strategy.logout(...arguments))
       .then(() => {
-        this.redirect('login');
-        this.$storage.setState('busy', false);
-        this.$storage.setState('loggedIn', false);
-        this.$storage.setState('user', {});
+        this.redirect('login')
+        this.$storage.setState('busy', false)
+        this.$storage.setState('loggedIn', false)
+        this.$storage.setState('user', {})
       })
       .catch(error => {
-        this.$storage.setState('busy', false);
+        this.$storage.setState('busy', false)
         return Promise.reject(error)
-      });
+      })
   }
 
   redirect(key) {
@@ -110,34 +110,34 @@ export default class Auth {
   }
 
   getTokens() {
-    let tokens = {};
+    let tokens = {}
     this.authHeaders.map((authHeader) => {
       tokens[authHeader] = this.$storage.getUniversal(authHeader)
-    });
+    })
     return tokens
   }
 
   setTokens(headers) {
-    let tokens = {};
+    let tokens = {}
     this.authHeaders.map((authHeader) => {
       tokens[authHeader] = this.$storage.setUniversal(authHeader, headers[authHeader])
-    });
+    })
     return tokens
   }
 
   clearTokens() {
-    let tokens = {};
+    let tokens = {}
     this.authHeaders.map((authHeader) => {
       tokens[authHeader] = this.$storage.setHeader(authHeader, undefined)
-    });
+    })
     return tokens
   }
 
   syncTokens() {
-    let tokens = {};
+    let tokens = {}
     this.authHeaders.map((authHeader) => {
       tokens[authHeader] = this.$storage.syncUniversal(authHeader)
-    });
+    })
     return tokens
   }
 

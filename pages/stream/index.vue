@@ -7,14 +7,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
-import VideoChat from "~/components/video-chat/VideoChat.vue"
+import { Component, Vue } from 'nuxt-property-decorator'
+import VideoChat from '~/components/video-chat/VideoChat.vue'
 
-import { StreamStore, vxm } from "~/store"
+import { StreamStore, vxm } from '~/store'
 
 
 @Component({
-  middleware: 'auth',
+  middleware: ['auth'],
   components: {
     VideoChat,
   },
@@ -24,10 +24,6 @@ export default class extends Vue {
 
   startStream(streams) {
     this.streamStore.connect(streams)
-  }
-
-  mounted() {
-    alert(this.$route.params)
   }
 }
 </script>

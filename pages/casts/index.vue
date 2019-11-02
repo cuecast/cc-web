@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
-import CastList from "~/components/casts/CastList.vue"
-import CastForm from "~/components/casts/CastForm.vue"
+import { Component, Vue } from 'nuxt-property-decorator'
+import CastList from '~/components/casts/CastList.vue'
+import CastForm from '~/components/casts/CastForm.vue'
 
-import { CastStore, vxm } from "~/store"
+import { CastStore, vxm } from '~/store'
 
 @Component({
   middleware: 'auth',
@@ -21,6 +21,7 @@ import { CastStore, vxm } from "~/store"
 })
 export default class extends Vue {
   castStore: CastStore = vxm.casts
+
   mounted() {
     console.log('Mounted casts:')
     this.castStore.fetchCasts()

@@ -1,10 +1,10 @@
 import Auth from './auth/auth'
 
 export default function (ctx, inject) {
-  const $auth = new Auth(ctx);
+  const $auth = new Auth(ctx)
 
-  inject('auth', $auth);
-  ctx.$auth = $auth;
+  inject('auth', $auth)
+  ctx.$auth = $auth
 
   return $auth.init().catch(error => {
     if (process.client) {

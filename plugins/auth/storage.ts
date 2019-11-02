@@ -39,8 +39,8 @@ export default class Storage {
     // Cookies
     this.setCookie(key, value)
 
-    // Local Storage
-    this.setLocalStorage(key, value)
+    // // Local Storage
+    // this.setLocalStorage(key, value)
 
     return value
   }
