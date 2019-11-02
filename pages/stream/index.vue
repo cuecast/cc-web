@@ -10,7 +10,7 @@
 import { Component, Vue } from "nuxt-property-decorator"
 import VideoChat from "~/components/video-chat/VideoChat.vue"
 
-import { AuthStore, StreamStore, vxm } from "~/store"
+import { StreamStore, vxm } from "~/store"
 
 
 @Component({
@@ -21,7 +21,6 @@ import { AuthStore, StreamStore, vxm } from "~/store"
 })
 export default class extends Vue {
   streamStore: StreamStore = vxm.streams
-  authStore: AuthStore = vxm.auth
 
   startStream(streams) {
     this.streamStore.connect(streams)

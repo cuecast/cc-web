@@ -25,7 +25,6 @@
     </template>
     <template slot="end">
       <b-dropdown
-        aria-role="menu"
         position="is-bottom-left"
         v-if="$auth.loggedIn">
         <a
@@ -50,29 +49,19 @@
           Log Out
         </b-dropdown-item>
       </b-dropdown>
-      <b-navbar-item v-else>
-        <div class="buttons">
-          <n-link class="button is-primary" to="/users/sign-up">
-            <strong>Sign Up</strong>
-          </n-link>
-          <n-link class="button is-light" to="/users/sign-in">
-            Sign In
-          </n-link>
-        </div>
-      </b-navbar-item>
     </template>
   </b-navbar>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator"
-import { AuthStore, vxm } from '~/store'
 
 @Component({
   components: {},
 })
 export default class CHeader extends Vue {
-  authStore: AuthStore = vxm.auth
+  mounted() {
+  }
 }
 </script>
 

@@ -20,8 +20,8 @@
     </div>
 
     <div class="has-text-centered">
-      <a @click="authStore.signIn(form)" class="button is-vcentered is-primary is-outlined">Sign In</a>
-      <a @click="authStore.googleSignIn()" class="button is-vcentered is-primary is-outlined">Sign In with Google</a>
+      <a @click="$auth.login('local', form)" class="button is-vcentered is-primary is-outlined">Sign In</a>
+      <a @click="$auth.login('google', form)" class="button is-vcentered is-primary is-outlined">Sign In with Google</a>
     </div>
 
     <div class="has-text-centered">
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { AuthStore, CastStore, vxm } from "~/store"
+import { CastStore, vxm } from "~/store"
 import { Component, Vue } from "nuxt-property-decorator"
 
 interface Form {
@@ -43,10 +43,9 @@ interface Form {
 @Component({layout: 'sign-in'})
 export default class extends Vue {
   castStore: CastStore = vxm.casts
-  authStore: AuthStore = vxm.auth
   form: Form = {
-    email: '',
-    password: ''
+    email: 'blur606@gmail.com',
+    password: 'element9'
   }
 }
 </script>

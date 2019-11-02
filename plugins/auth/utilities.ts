@@ -37,3 +37,26 @@ export function decodeValue(val) {
   // Return as is
   return val
 }
+
+export const routeOption = (route, key, value) => {
+  return route.matched.some(m => {
+    if (process.client) {
+      // Client
+      return Object.values(m.components).some(
+        // @ts-ignore
+        component => component.options && component.options[key] === value
+      )
+    }
+    // SSR
+    return Object.values(m.components).some(component =>
+      // @ts-ignore
+      Object.values(component._Ctor).some(
+        // @ts-ignore
+        ctor => ctor.options && ctor.options[key] === value
+      )
+    )
+
+  })
+}
+
+

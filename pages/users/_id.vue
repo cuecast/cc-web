@@ -1,13 +1,12 @@
 <template>
   <div v-if="$auth.loggedIn">
-    <h1>{{authStore.user.email}}</h1>
+    <h1>{{$auth.user.email}}</h1>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator"
 import { User } from '~/types'
-import { AuthStore, vxm } from '~/store'
 
 @Component({
   validate({params}) {
@@ -15,8 +14,6 @@ import { AuthStore, vxm } from '~/store'
   }
 })
 export default class extends Vue {
-  authStore: AuthStore = vxm.auth
-
   constructor() {
     super()
   }

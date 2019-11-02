@@ -11,7 +11,6 @@ import { Vue, Component } from "nuxt-property-decorator"
 export default class extends Vue {
   mounted() {
     this.$axios.$get('calls').then((res) => {
-      debugger
     })
   }
 }

@@ -26,14 +26,14 @@
 
 
     <div class="has-text-centered">
-      <a @click="authStore.signUp(form)"
+      <a @click="$auth.signUp(form)"
          class="button is-vcentered is-primary is-outlined">Register</a>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { AuthStore, CastStore, vxm } from "~/store"
+import { CastStore, vxm } from "~/store"
 import { Component, Vue } from "nuxt-property-decorator"
 
 interface Form {
@@ -45,7 +45,6 @@ interface Form {
 @Component
 export default class extends Vue {
   castStore: CastStore = vxm.casts
-  authStore: AuthStore = vxm.auth
   form: Form = {
     email: 'blur606@gmail.com',
     password: 'element9',

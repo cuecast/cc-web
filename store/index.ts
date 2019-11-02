@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { AuthStore, CallStore, CastStore, StreamStore } from "~/store";
+import { CallStore, CastStore, StreamStore } from "~/store";
 import { createProxy, extractVuexModule } from "./cuecast-store";
 
 Vue.use(Vuex);
@@ -31,7 +31,6 @@ export const mutations = {
 export const store = new Vuex.Store({
   state: state(),
   modules: {
-    ...extractVuexModule(AuthStore),
     ...extractVuexModule(CastStore),
     ...extractVuexModule(StreamStore),
     ...extractVuexModule(CallStore),
@@ -40,13 +39,11 @@ export const store = new Vuex.Store({
   mutations: mutations
 });
 
-export { AuthStore } from "./auth";
 export { CastStore } from "./casts";
 export { StreamStore } from "./streams";
 export { CallStore } from "./calls";
 
 export const vxm = {
-  auth: createProxy(store, AuthStore),
   casts: createProxy(store, CastStore),
   streams: createProxy(store, StreamStore),
   calls: createProxy(store, CallStore),
