@@ -13,6 +13,7 @@ export default class Auth {
   $state: any
   $axios: any
   $redirect: any
+  oAuthTimer: any = null
   strategies: { [key: string]: AuthScheme } = {}
   authHeaders: Array<string> = ['access-token', 'client', 'uid', 'expiry']
 
@@ -68,11 +69,13 @@ export default class Auth {
       // Call mounted for active strategy on initial load
       await this.mounted()
     } catch (error) {
+      console.log('Failed to mount: ', error)
     } finally {
       // Watch for loggedIn changes only in client side
       if (process.client) {
         this.$storage.watchState('loggedIn', loggedIn => {
           if (!routeOption(this.ctx.route, 'auth', false)) {
+            console.log('redirecting in finally')
             this.redirect(loggedIn ? 'profile' : 'login')
           }
         })

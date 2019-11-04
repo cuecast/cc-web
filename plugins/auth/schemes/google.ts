@@ -10,20 +10,14 @@ export default class GoogleScheme implements AuthScheme {
   $axios: any
   $auth: any
   options: any
-  oAuthTimer: any
 
   constructor(ctx) {
     this.ctx = ctx
-    this.$auth = ctx.app.$auth
     this.$axios = ctx.app.$axios
 
     this.options = {
       apiUrl: 'http://localhost:4000/api/',
       providerPath: 'auth/google_oauth2'
-    }
-
-    if (process.client) {
-      window.addEventListener('message', this.handlePostMessage, false)
     }
   }
 
@@ -46,6 +40,7 @@ export default class GoogleScheme implements AuthScheme {
       this.ctx.$auth.$storage.setState('loggedIn', true)
       this.ctx.$auth.$storage.setState('user', res.data)
     }).catch((err: any) => {
+      console.log('catch in mounted: ', err)
       this.ctx.$auth.$storage.setState('busy', false)
       this.ctx.$auth.$storage.setState('loggedIn', false)
       this.ctx.$auth.$storage.setState('user', {})
@@ -53,23 +48,21 @@ export default class GoogleScheme implements AuthScheme {
     })
   }
 
-
   handlePostMessage(e) {
     if (process.server) return
-    let ctx = $nuxt.context
-    ctx.$auth.$storage.setState('busy', true)
+    let $auth = $nuxt.context.$auth
 
     if (e.data.message === 'deliverCredentials') {
       delete e.data.message
 
-      ctx.$auth.setTokens(ctx.$auth.normalizeTokenKeys(e.data))
-      ctx.$auth.$storage.setState('busy', false)
-      ctx.$auth.$storage.setState('loggedIn', true)
-      ctx.$auth.$storage.setState('user', e.data)
+      $auth.setTokens($auth.normalizeTokenKeys(e.data))
+      $auth.$storage.setState('loggedIn', true)
+      $auth.$storage.setState('user', e.data)
 
-      if (ctx.$auth.loggedIn) {
-        clearTimeout(this.oAuthTimer)
-        this.oAuthTimer = null
+      if ($auth.loggedIn) {
+        console.log('Successfully received credentials from popup.')
+        clearTimeout($auth.oAuthTimer)
+        $auth.oAuthTimer = null
       }
 
     }
@@ -94,14 +87,15 @@ export default class GoogleScheme implements AuthScheme {
   }
 
   private listenForCredentials(popup) {
-    var self = this
+    window.addEventListener('message', this.handlePostMessage, false)
+    let self = this
     if (popup.closed) {
       console.log('Failed to get credentials from popup.')
     } else {
       popup.postMessage('requestCredentials', '*')
-      self.oAuthTimer = setTimeout(function () {
+      this.ctx.$auth.oAuthTimer = setTimeout(function () {
         self.listenForCredentials(popup)
-      }, 100)
+      }, 500)
     }
   };
 

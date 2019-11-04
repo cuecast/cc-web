@@ -9,7 +9,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({
-  middleware: ['auth']
+  middleware: 'auth'
 })
 export default class extends Vue {
 }

@@ -7,10 +7,12 @@ export default async function (ctx) {
 
   if (ctx.$auth.$state.loggedIn) {
     if (insidePage('login')) {
-      ctx.$auth.redirect('profile')
+      console.log('redirecting in middleware after loggedIn was true')
+      ctx.$auth.redirect('test')
     }
   } else {
     if ((!insidePage('login'))) {
+      console.log('redirecting in middleware after loggedIn was false')
       ctx.$auth.redirect('login')
     }
   }
