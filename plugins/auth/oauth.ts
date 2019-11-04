@@ -1,6 +1,4 @@
-import { AuthScheme } from '~/types'
-
-export default class LocalScheme implements AuthScheme {
+export default class OauthScheme {
 
   ctx: any
   $state: any
@@ -9,8 +7,8 @@ export default class LocalScheme implements AuthScheme {
 
   constructor(ctx) {
     this.ctx = ctx
-    this.$auth = ctx.app.$auth
-    this.$axios = ctx.app.$axios
+    this.$auth = ctx.$auth
+    this.$axios = this.ctx.app.$axios
   }
 
   async login() {
@@ -24,7 +22,6 @@ export default class LocalScheme implements AuthScheme {
   }
 
   async logout() {
-    this.ctx.$auth.syncTokens()
     await this.$axios.delete('/auth/sign_out').then(() => {
       this.ctx.$auth.clearTokens()
     })

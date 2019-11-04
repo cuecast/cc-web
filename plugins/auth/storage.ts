@@ -2,7 +2,7 @@ import Vue from 'vue'
 import getProp from 'dotprop'
 import { decodeValue, encodeValue, isSet, isUnset } from './utilities'
 import { parse as parseCookie, serialize as serializeCookie } from 'cookie'
-import { User } from "~/types";
+import { User } from '~/types'
 
 interface InitialState {
   user?: User
@@ -10,16 +10,16 @@ interface InitialState {
 }
 
 export default class Storage {
-  ctx: any;
-  state: any;
-  initialState: InitialState;
-  prefix: string = 'auth.';
+  ctx: any
+  state: any
+  initialState: InitialState
+  prefix: string = 'auth.'
 
   constructor(ctx) {
-    this.ctx = ctx;
-    this.initialState = {user: undefined, loggedIn: false};
+    this.ctx = ctx
+    this.initialState = {user: undefined, loggedIn: false}
 
-    this._initState();
+    this._initState()
     this.state
   }
 
@@ -39,8 +39,8 @@ export default class Storage {
     // Cookies
     this.setCookie(key, value)
 
-    // // Local Storage
-    // this.setLocalStorage(key, value)
+    // Local Storage
+    this.setLocalStorage(key, value)
 
     return value
   }
@@ -51,12 +51,12 @@ export default class Storage {
 
     // Cookies
     if (isUnset(value)) {
-      value = this.getCookie(key)
+      return value = this.getCookie(key)
     }
 
     // Local Storage
     if (isUnset(value)) {
-      value = this.getLocalStorage(key)
+      return value = this.getLocalStorage(key)
     }
 
     return value
@@ -100,17 +100,17 @@ export default class Storage {
           Vue.set(state, payload.key, payload.value)
         }
       }
-    };
+    }
 
     this.ctx.store.registerModule('auth', authModule, {
       preserveState: Boolean(this.ctx.store.state['auth'])
-    });
+    })
 
     this.state = this.ctx.store.state['auth']
   }
 
   setState(key, value) {
-    this.ctx.store.commit('auth/SET', {key, value});
+    this.ctx.store.commit('auth/SET', {key, value})
     return value
   }
 
@@ -134,6 +134,7 @@ export default class Storage {
   // ------------------------------------
 
   setLocalStorage(key, value) {
+    if (process.server) return
     if (isUnset(value)) {
       return this.removeLocalStorage(key)
     }
@@ -152,7 +153,7 @@ export default class Storage {
       return
     }
 
-    const value = localStorage.getItem(key);
+    const value = localStorage.getItem(key)
 
     return decodeValue(value)
   }
@@ -184,7 +185,7 @@ export default class Storage {
   getCookies() {
     const cookieStr = process.client
       ? document.cookie
-      : this.ctx.req.headers.cookie;
+      : this.ctx.req.headers.cookie
 
     return parseCookie(cookieStr || '') || {}
   }
@@ -194,8 +195,8 @@ export default class Storage {
       return
     }
 
-    const _key = this.prefix + key;
-    const _value = encodeValue(value);
+    const _key = this.prefix + key
+    const _value = encodeValue(value)
 
     // Unset null, undefined
     if (isUnset(value)) {
@@ -204,18 +205,18 @@ export default class Storage {
 
     // Accept expires as a number for js-cookie compatiblity
     if (typeof options.expires === 'number') {
-      let date = new Date().getDate();
+      let date = new Date().getDate()
       options.expires = new Date((date * 1) + options.expires * 864e+5)
     }
 
-    const serializedCookie = serializeCookie(_key, _value, options);
+    const serializedCookie = serializeCookie(_key, _value, options)
 
     if (process.client) {
       // Set in browser
       document.cookie = serializedCookie
     } else if (process.server && this.ctx.res) {
       // Send Set-Cookie header from server side
-      const prevCookies = this.ctx.res.getHeader('Set-Cookie');
+      const prevCookies = this.ctx.res.getHeader('Set-Cookie')
       this.ctx.res.setHeader('Set-Cookie', [].concat(prevCookies, serializedCookie).filter(v => v))
     }
 
@@ -227,11 +228,11 @@ export default class Storage {
       return
     }
 
-    const _key = this.prefix + key;
+    const _key = this.prefix + key
 
-    const cookies = this.getCookies();
+    const cookies = this.getCookies()
 
-    const value = cookies[_key] ? decodeURIComponent(cookies[_key]) : undefined;
+    const value = cookies[_key] ? decodeURIComponent(cookies[_key]) : undefined
 
     return decodeValue(value)
   }

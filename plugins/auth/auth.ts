@@ -1,26 +1,28 @@
 import Storage from './storage'
 import LocalScheme from '~/plugins/auth/schemes/local'
+import GoogleScheme from '~/plugins/auth/schemes/google'
 import { routeOption } from '~/plugins/auth/utilities'
+import { AuthOptions, AuthScheme } from '~/types'
 
 export default class Auth {
 
   ctx: any
   error: null
-  options: any
+  options: AuthOptions
   $storage: any
   $state: any
   $axios: any
   $redirect: any
-  strategies: any = {}
-  authHeaders: any = ['access-token', 'client', 'uid', 'expiry']
+  strategies: { [key: string]: AuthScheme } = {}
+  authHeaders: Array<string> = ['access-token', 'client', 'uid', 'expiry']
 
   constructor(ctx) {
     this.ctx = ctx
-    this.$axios = this.ctx.app.$axios
+    this.$axios = ctx.app.$axios
 
     const storage = new Storage(ctx)
 
-    this.$redirect = this.ctx.redirect
+    this.$redirect = ctx.redirect
     this.$storage = storage
     this.$state = storage.state
 
@@ -33,9 +35,8 @@ export default class Auth {
       }
     }
 
-    this.strategies = {}
-    this.strategies['local'] = new LocalScheme(this.ctx)
-    // this.strategies['google'] = new GoogleScheme(this.ctx);
+    this.strategies['local'] = new LocalScheme(ctx)
+    this.strategies['google'] = new GoogleScheme(ctx)
   }
 
   get strategy() {
@@ -83,10 +84,10 @@ export default class Auth {
     this.setStrategy(name)
 
     this.$storage.setState('busy', true)
-    this.error = null
 
     this.strategy.login(args)
 
+    this.$storage.setState('busy', false)
   }
 
   logout() {
@@ -141,9 +142,27 @@ export default class Auth {
     return tokens
   }
 
+  normalizeTokenKeys(params) {
+    // normalize keys
+    if (params.token) {
+      params['access-token'] = params.token
+      delete params.token
+    }
+    if (params.auth_token) {
+      params['access-token'] = params.auth_token
+      delete params.auth_token
+    }
+    if (params.client_id) {
+      params.client = params.client_id
+      delete params.client_id
+    }
+
+    return params
+  };
+
   private setStrategy(name) {
     if (name === this.strategy) {
-      return Promise.resolve()
+      return
     }
 
     this.$storage.setUniversal('strategy', name)

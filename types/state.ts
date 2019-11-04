@@ -1,6 +1,9 @@
-import { Todo } from "~/types";
+export interface User {
+  id: number
+  email: string
+}
 
-export interface RootState {
-  todos: Todo[];
-  nextId: number
+export interface Cast {
+  id: number
+  name: string
 }

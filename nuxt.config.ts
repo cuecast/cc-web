@@ -69,29 +69,29 @@ export default {
       }
     }
   },
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: {url: '/auth/sign_in'},
-          logout: {url: '/auth/sign_out', method: 'delete'},
-          user: {url: '/users/current', propertyName: 'user'}
-        },
-      },
-      google: {
-        client_id: '1093614674363-621bn6aavnrt0s64v725aj1qpe6n8rqu.apps.googleusercontent.com',
-        redirect_uri: 'http://localhost:3000/login',
-        user: false,
-        response_type: 'code',
-        access_type: 'offline',
-        access_token_endpoint: 'http://localhost:3000/api/users/google_oauth2/callback'
-      },
-    },
-    // redirect: {
-    //   login: '/stream',
-    //   logout: '/users/sign-in',
-    //   callback: '/users/sign-in',
-    //   home: '/stream'
-    // },
-  }
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: {url: '/auth/sign_in'},
+  //         logout: {url: '/auth/sign_out', method: 'delete'},
+  //         user: {url: '/users/current', propertyName: 'user'}
+  //       },
+  //     },
+  //     google: {
+  //       client_id: '1093614674363-621bn6aavnrt0s64v725aj1qpe6n8rqu.apps.googleusercontent.com',
+  //       redirect_uri: 'http://localhost:3000/login',
+  //       user: false,
+  //       response_type: 'code',
+  //       access_type: 'offline',
+  //       access_token_endpoint: 'http://localhost:3000/api/users/google_oauth2/callback'
+  //     },
+  //   },
+  //   // redirect: {
+  //   //   login: '/stream',
+  //   //   logout: '/users/sign-in',
+  //   //   callback: '/users/sign-in',
+  //   //   home: '/stream'
+  //   // },
+  // }
 }
