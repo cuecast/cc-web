@@ -10,7 +10,7 @@ declare var $nuxt: any;
 
 @Module({namespacedPath: 'casts'})
 export class CastStore extends VuexModule {
-  casts: Cast[] = <Cast[]>[{name: 'hello'}, {name: 'world'}]
+  casts: Cast[] = <Cast[]>[]
 
   @mutation SET_CASTS(casts) {
     this.casts = casts

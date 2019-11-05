@@ -1,7 +1,7 @@
 import Storage from './storage'
 import LocalScheme from '~/plugins/auth/schemes/local'
 import GoogleScheme from '~/plugins/auth/schemes/google'
-import { routeOption } from '~/plugins/auth/utilities'
+import { isSet, isUnset, routeOption } from '~/plugins/auth/utilities'
 import { AuthOptions, AuthScheme } from '~/types'
 
 export default class Auth {
@@ -18,6 +18,7 @@ export default class Auth {
   authHeaders: Array<string> = ['access-token', 'client', 'uid', 'expiry']
 
   constructor(ctx) {
+    console.log('AUTH CONSTRUCTOR')
     this.ctx = ctx
     this.$axios = ctx.app.$axios
 
@@ -53,11 +54,12 @@ export default class Auth {
   }
 
   async init() {
-    this.$storage.syncUniversal('strategy', 'local')
+    this.$storage.syncUniversal('strategy')
     //
     // // Set default strategy if current one is invalid
     if (!this.strategy) {
-      this.$storage.setUniversal('strategy', 'login')
+      this.$storage.setUniversal('strategy', 'local')
+      this.setStrategy(name)
 
       // Give up if still invalid
       if (!this.strategy) {
@@ -76,6 +78,9 @@ export default class Auth {
         this.$storage.watchState('loggedIn', loggedIn => {
           if (!routeOption(this.ctx.route, 'auth', false)) {
             console.log('redirecting in finally')
+            // if(loggedIn && !this.ctx.from) {
+            //   return
+            // }
             this.redirect(loggedIn ? 'profile' : 'login')
           }
         })
@@ -96,7 +101,7 @@ export default class Auth {
   logout() {
     this.$storage.setState('busy', true)
 
-    return Promise.resolve(this.strategy.logout(...arguments))
+    return Promise.resolve(this.strategy.logout())
       .then(() => {
         this.redirect('login')
         this.$storage.setState('busy', false)
@@ -124,6 +129,10 @@ export default class Auth {
   setTokens(headers) {
     let tokens = {}
     this.authHeaders.map((authHeader) => {
+      if (isUnset(headers[authHeader])) {
+        debugger
+        console.log('authHeader ' + authHeader + ' is not set.')
+      }
       tokens[authHeader] = this.$storage.setUniversal(authHeader, headers[authHeader])
     })
     return tokens
@@ -132,7 +141,7 @@ export default class Auth {
   clearTokens() {
     let tokens = {}
     this.authHeaders.map((authHeader) => {
-      tokens[authHeader] = this.$storage.setHeader(authHeader, undefined)
+      tokens[authHeader] = this.$storage.removeUniversal(authHeader)
     })
     return tokens
   }
@@ -172,7 +181,7 @@ export default class Auth {
   }
 
   private async mounted() {
-    return Promise.resolve(this.strategy.mounted(...arguments)).catch(error => {
+    return Promise.resolve(this.strategy.mounted()).catch(error => {
       return Promise.reject(error)
     })
   }

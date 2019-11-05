@@ -12,80 +12,13 @@ interface InitialState {
 export default class Storage {
   ctx: any
   state: any
-  initialState: InitialState
+  initialState: InitialState = {user: undefined, loggedIn: false}
   prefix: string = 'auth.'
 
   constructor(ctx) {
     this.ctx = ctx
-    this.initialState = {user: undefined, loggedIn: false}
-
     this._initState()
-    this.state
   }
-
-  // ------------------------------------
-  // Universal
-  // ------------------------------------
-
-  setUniversal(key, value) {
-    // Unset null, undefined
-    if (isUnset(value)) {
-      return this.removeUniversal(key)
-    }
-
-    // Local state
-    this.setState(key, value)
-
-    // Cookies
-    this.setCookie(key, value)
-
-    // Local Storage
-    this.setLocalStorage(key, value)
-
-    return value
-  }
-
-  getUniversal(key) {
-    // Local state
-    let value = this.getState(key)
-
-    // Cookies
-    if (isUnset(value)) {
-      return value = this.getCookie(key)
-    }
-
-    // Local Storage
-    if (isUnset(value)) {
-      return value = this.getLocalStorage(key)
-    }
-
-    return value
-  }
-
-  syncUniversal(key, defaultValue) {
-    let value = this.getUniversal(key)
-
-    if (isUnset(value) && isSet(defaultValue)) {
-      value = defaultValue
-    }
-
-    if (isSet(value)) {
-      this.setUniversal(key, value)
-    }
-
-    if (isSet(value)) {
-      this.setHeader(key, value)
-    }
-
-    return value
-  }
-
-  removeUniversal(key) {
-    this.removeState(key)
-    this.removeLocalStorage(key)
-    this.removeCookie(key, undefined)
-  }
-
 
   // ------------------------------------
   // Local state (reactive)
@@ -108,6 +41,72 @@ export default class Storage {
 
     this.state = this.ctx.store.state['auth']
   }
+
+  // ------------------------------------
+  // Universal
+  // ------------------------------------
+
+  setUniversal(key, value) {
+    // Unset null, undefined
+    if (isUnset(value)) {
+      console.log('removing ' + key)
+      return this.removeUniversal(key)
+    }
+
+    this.setState(key, value)
+
+    let cookie = this.setCookie(key, value)
+
+    if (isUnset(cookie)) {
+      this.setLocalStorage(key, value)
+    }
+
+    this.setHeader(key, value)
+
+    return value
+  }
+
+  getUniversal(key) {
+    // Local state
+    let value = this.getState(key)
+
+    // Cookies
+    if (isUnset(value)) {
+      value = this.getCookie(key)
+    }
+
+    // Local Storage
+    if (isUnset(value)) {
+      value = this.getLocalStorage(key)
+    }
+
+    return value
+  }
+
+  syncUniversal(key, defaultValue = undefined) {
+
+    let value = this.getUniversal(key)
+
+    if (isUnset(value) && isSet(defaultValue)) {
+      value = defaultValue
+    }
+
+    if (isSet(value)) {
+      this.setUniversal(key, value)
+    } else {
+      console.log(key + ' is not set.')
+    }
+
+    return value
+  }
+
+  removeUniversal(key) {
+    this.removeState(key)
+    this.removeLocalStorage(key)
+    this.removeCookie(key)
+    this.removeHeader(key)
+  }
+
 
   setState(key, value) {
     this.ctx.store.commit('auth/SET', {key, value})
@@ -136,7 +135,7 @@ export default class Storage {
   setLocalStorage(key, value) {
     if (process.server) return
     if (isUnset(value)) {
-      return this.removeLocalStorage(key)
+      // return this.removeLocalStorage(key)
     }
 
     try {
@@ -171,10 +170,12 @@ export default class Storage {
   // ------------------------------------
 
   setHeader(key, token) {
+    if (!this.ctx.$auth.authHeaders.includes(key)) return
     this.ctx.app.$axios.setHeader(key, token)
   }
 
   removeHeader(key) {
+    if (!this.ctx.$auth.authHeaders.includes(key)) return
     this.ctx.app.$axios.setHeader(key, false)
   }
 
@@ -217,6 +218,8 @@ export default class Storage {
     } else if (process.server && this.ctx.res) {
       // Send Set-Cookie header from server side
       const prevCookies = this.ctx.res.getHeader('Set-Cookie')
+      let serverCookie = [].concat(prevCookies, serializedCookie).filter(v => v)
+      console.log(serverCookie)
       this.ctx.res.setHeader('Set-Cookie', [].concat(prevCookies, serializedCookie).filter(v => v))
     }
 
@@ -237,8 +240,8 @@ export default class Storage {
     return decodeValue(value)
   }
 
-  removeCookie(key, options) {
-    this.setCookie(key, undefined, options)
+  removeCookie(key) {
+    this.setCookie(key, undefined)
   }
 
 }

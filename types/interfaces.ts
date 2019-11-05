@@ -1,5 +1,5 @@
 export interface AuthScheme {
-  login: () => (void)
+  login: (params: any) => (void)
   logout: () => (void)
   mounted: () => (void)
 }

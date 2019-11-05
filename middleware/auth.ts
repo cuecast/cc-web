@@ -1,18 +1,18 @@
-import { normalizePath } from '~/plugins/auth/utilities'
-
 export default async function (ctx) {
 
-  const insidePage = key =>
-    normalizePath(ctx.route.path) === normalizePath(ctx.$auth.options.redirect[key])
-
+  const insidePage = key => {
+    console.log(ctx.route.path)
+    console.log(ctx.$auth.options.redirect[key])
+    return ctx.route.path === ctx.$auth.options.redirect[key]
+  }
   if (ctx.$auth.$state.loggedIn) {
     if (insidePage('login')) {
-      console.log('redirecting in middleware after loggedIn was true')
-      ctx.$auth.redirect('test')
+      console.log('redirecting in middleware after loggedIn was TRUE')
+      ctx.$auth.redirect('profile')
     }
   } else {
     if ((!insidePage('login'))) {
-      console.log('redirecting in middleware after loggedIn was false')
+      console.log('redirecting in middleware after loggedIn was FALSE')
       ctx.$auth.redirect('login')
     }
   }

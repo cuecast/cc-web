@@ -7,11 +7,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { CastStore, vxm } from '~/store'
 
 @Component({
   middleware: 'auth'
 })
 export default class extends Vue {
+  castStore: CastStore = vxm.casts
+
+  mounted() {
+    console.log('Mounted casts:')
+    this.castStore.fetchCasts()
+  }
+
 }
 </script>
 
