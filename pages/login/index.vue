@@ -10,7 +10,7 @@ import { Vue, Component } from "nuxt-property-decorator"
 @Component
 export default class extends Vue {
   created() {
-    this.$router.push('/testing/random')
+    // this.$router.push('/testing/random')
   }
 }
 </script>

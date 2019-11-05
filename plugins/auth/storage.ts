@@ -210,7 +210,7 @@ export default class Storage {
       options.expires = new Date((date * 1) + options.expires * 864e+5)
     }
 
-    const serializedCookie = serializeCookie(_key, _value, options)
+    const serializedCookie = serializeCookie(_key, _value, {path: '/'})
 
     if (process.client) {
       // Set in browser

@@ -103,7 +103,7 @@ export default class Auth {
 
     return Promise.resolve(this.strategy.logout())
       .then(() => {
-        this.redirect('login')
+        // this.redirect('login')
         this.$storage.setState('busy', false)
         this.$storage.setState('loggedIn', false)
         this.$storage.setState('user', {})
@@ -168,6 +168,10 @@ export default class Auth {
       params.client = params.client_id
       delete params.client_id
     }
+    // if (params.email) {
+    //   params.uid = params.email
+    //   delete params.email
+    // }
 
     return params
   };
@@ -181,6 +185,8 @@ export default class Auth {
   }
 
   private async mounted() {
+    this.$storage.syncUniversal('strategy')
+
     return Promise.resolve(this.strategy.mounted()).catch(error => {
       return Promise.reject(error)
     })

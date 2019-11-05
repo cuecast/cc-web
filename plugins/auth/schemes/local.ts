@@ -37,12 +37,14 @@ export default class LocalScheme implements AuthScheme {
       this.ctx.$auth.setTokens(res.config.headers)
       this.ctx.$auth.$storage.setState('busy', false)
       this.ctx.$auth.$storage.setState('loggedIn', true)
+      this.ctx.$auth.$storage.setUniversal('loggedIn', true)
       this.ctx.$auth.$storage.setState('user', res.data)
     }).catch((err: any) => {
       this.ctx.$auth.$storage.setState('busy', false)
       this.ctx.$auth.$storage.setState('loggedIn', false)
+      this.ctx.$auth.$storage.setUniversal('loggedIn', false)
       this.ctx.$auth.$storage.setState('user', {})
-      this.ctx.$auth.redirect('login')
+      // this.ctx.$auth.redirect('login')
     })
   }
 }

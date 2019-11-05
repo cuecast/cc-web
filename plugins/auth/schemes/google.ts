@@ -35,11 +35,14 @@ export default class GoogleScheme implements AuthScheme {
   async mounted() {
     this.ctx.$auth.syncTokens()
     return await this.$axios.get('/users/current').then((res: any) => {
-      this.ctx.$auth.setTokens(res.headers)
+      this.ctx.$auth.setTokens(res.config.headers)
       this.ctx.$auth.$storage.setState('busy', false)
       this.ctx.$auth.$storage.setState('loggedIn', true)
+      this.ctx.$auth.$storage.setUniversal('loggedIn', true)
       this.ctx.$auth.$storage.setState('user', res.data)
     }).catch((err: any) => {
+
+      debugger
       console.log('catch in mounted: ', err)
       this.ctx.$auth.$storage.setState('busy', false)
       this.ctx.$auth.$storage.setState('loggedIn', false)
@@ -57,6 +60,7 @@ export default class GoogleScheme implements AuthScheme {
 
       $auth.setTokens($auth.normalizeTokenKeys(e.data))
       $auth.$storage.setState('loggedIn', true)
+      $auth.$storage.setUniversal('loggedIn', true)
       $auth.$storage.setState('user', e.data)
 
       if ($auth.loggedIn) {
