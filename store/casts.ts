@@ -1,9 +1,8 @@
 import Vue from "vue";
 import { action, mutation, VuexModule, Module } from "~/store/cuecast-store";
 import CuecastSocket from '../channels/cuecast-socket'
-import { api } from '~/utils'
 import { Cast } from "~/types";
-
+import { NuxtAxiosInstance } from '~/node_modules/@nuxtjs/axios'
 
 let socket: CuecastSocket;
 declare var $nuxt: any;
@@ -47,7 +46,7 @@ export class CastStore extends VuexModule {
   async fetchCasts() {
     console.log('fetching casts...')
     this.connect()
-    await api.$get('casts').then(res => {
+    await $nuxt.$axios.$get('casts').then(res => {
       this.SET_CASTS(res)
     })
   }
