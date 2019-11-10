@@ -14,18 +14,6 @@ import { CastStore, vxm } from '~/store'
   middleware: 'auth'
 })
 export default class extends Vue {
-  castStore: CastStore = vxm.casts
-
-  testAuth() {
-    this.castStore.fetchCasts()
-    console.log(this.castStore.casts)
-  }
-
-  mounted() {
-    console.log('Mounted casts:')
-    this.castStore.fetchCasts()
-  }
-
 }
 </script>
 

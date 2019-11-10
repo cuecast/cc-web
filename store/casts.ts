@@ -1,10 +1,10 @@
 import Vue from "vue";
 import { action, mutation, VuexModule, Module } from "~/store/cuecast-store";
-import CuecastSocket from '../channels/cuecast-socket'
+// import CuecastSocket from '../channels/cuecast-socket'
 import { Cast } from "~/types";
 import { NuxtAxiosInstance } from '~/node_modules/@nuxtjs/axios'
 
-let socket: CuecastSocket;
+// let socket: CuecastSocket;
 declare var $nuxt: any;
 
 @Module({namespacedPath: 'casts'})
@@ -28,18 +28,18 @@ export class CastStore extends VuexModule {
   @action
   async connect() {
     console.log('Connecting to CuecastSocket.')
-    socket = new CuecastSocket()
+    // socket = new CuecastSocket()
   }
 
   @action
   async addCast(params) {
     console.log('adding cast...')
-    socket.addCast(params)
+    // socket.addCast(params)
   }
 
   @action
   async removeCast(params) {
-    socket.removeCast(params)
+    // socket.removeCast(params)
   }
 
   @action

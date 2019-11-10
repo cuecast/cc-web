@@ -7,3 +7,9 @@ export interface Cast {
   id: number
   name: string
 }
+
+
+export interface YoutubeStream {
+  id: number
+}
+

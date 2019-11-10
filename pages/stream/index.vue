@@ -1,7 +1,5 @@
 <template>
   <section>
-    <h1 class="title">Stream</h1>
-    {{token}}
     <video-chat @start-stream="startStream"></video-chat>
   </section>
 </template>
@@ -10,7 +8,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import VideoChat from '~/components/video-chat/VideoChat.vue'
 
-import { StreamStore, vxm } from '~/store'
+import { CallStore, vxm } from '~/store'
 
 
 @Component({
@@ -20,10 +18,10 @@ import { StreamStore, vxm } from '~/store'
   },
 })
 export default class extends Vue {
-  streamStore: StreamStore = vxm.streams
+  callStore: CallStore = vxm.calls
 
   startStream(streams) {
-    this.streamStore.connect(streams)
+    this.callStore.connect(streams)
   }
 }
 </script>
