@@ -20,6 +20,7 @@
     "paths": {
       "~/*": ["./*"]
     },
+    "plugins": [{ "name": "ts-vue-plugin" }],
     "types": [
       "@nuxt/types",
       "@types/node",

@@ -1,14 +1,13 @@
 <template>
   <div>
     <h1 class="title">Welcome, {{$auth.user.email}}.</h1>
-    <button class="button is-success" @click="testAuth">Test Auth</button>
-    <n-link class="button is-primary" to="/casts/new">Start a Cast</n-link>
+    <n-link class="button is-success" to="/streams">Test Host</n-link>
+    <n-link class="button is-success" to="/streams">Test Guest</n-link>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { CastStore, vxm } from '~/store'
 
 @Component({
   middleware: 'auth'

@@ -28,6 +28,7 @@
     "nuxt-property-decorator": "2.3.0",
     "phoenix": "^1.4.9",
     "ts-node": "8.3.0",
+    "ts-vue-plugin": "^0.1.2",
     "vue": "^2.6.10",
     "vuex-class": "0.3.2",
     "vuex-class-component": "^2.0.4",

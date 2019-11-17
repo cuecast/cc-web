@@ -45,7 +45,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    'nuxt-buefy',
+    '@nuxtjs/vuetify',
+
     ['nuxt-fontawesome', {
       component: 'fa',
       imports: [

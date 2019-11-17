@@ -32,7 +32,6 @@
 </template>
 
 <script lang="ts">
-import { CastStore, vxm } from "~/store"
 import { Component, Vue } from "nuxt-property-decorator"
 
 interface Form {
@@ -42,7 +41,6 @@ interface Form {
 
 @Component({layout: 'sign-in'})
 export default class extends Vue {
-  castStore: CastStore = vxm.casts
   form: Form = {
     email: 'blur606@gmail.com',
     password: 'element9'

@@ -18,7 +18,6 @@ export default class Auth {
   authHeaders: Array<string> = ['access-token', 'client', 'uid', 'expiry']
 
   constructor(ctx) {
-    console.log('AUTH CONSTRUCTOR')
     this.ctx = ctx
     this.$axios = ctx.app.$axios
 

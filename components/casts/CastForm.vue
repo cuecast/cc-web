@@ -22,11 +22,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator"
-import { CastStore, vxm } from "~/store"
 
 @Component
 export default class extends Vue {
-  castStore: CastStore = vxm.casts
   form: {} = {name: ''}
 }
 </script>

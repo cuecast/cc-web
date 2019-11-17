@@ -1,5 +1,5 @@
 <template>
-  <b-navbar style="margin-bottom: 2rem;  box-shadow:0px 1px 4px #eee;">
+  <b-navbar style="box-shadow:0px 1px 4px #eee;">
     <template slot="brand">
       <b-navbar-item tag="nuxt-link" to="/">
         <strong class="is-size-5">CueCast</strong>
@@ -13,10 +13,8 @@
         Casts
       </b-navbar-item>
       <b-navbar-dropdown label="Info">
-        <b-navbar-item>
-          <n-link to="/testing/random">
+        <b-navbar-item tag="nuxt-link" to="/testing/random">
             Random
-          </n-link>
         </b-navbar-item>
         <b-navbar-item>
           Contact

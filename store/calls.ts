@@ -20,11 +20,16 @@ export class CallStore extends VuexModule {
 
   @action
   async connect (streams: any) {
-    this.localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-    streams.localVideo.srcObject = this.localStream;
+    if (streams.localVideo) {
+      this.localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true})
+      streams.localVideo.srcObject = this.localStream
+      this.localVideo = streams.localVideo
+    }
 
-    this.localVideo = streams.localVideo;
-    this.remoteVideo = streams.remoteVideo;
+    if (streams.remoteVideo) {
+      this.remoteVideo = streams.remoteVideo
+    }
+
     this.userId = $nuxt.$auth.user.email;
     socket = new CallSocket();
   }

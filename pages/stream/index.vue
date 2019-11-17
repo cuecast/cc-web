@@ -1,28 +1,37 @@
 <template>
   <section>
-    <video-chat @start-stream="startStream"></video-chat>
+    <div class="columns">
+      <div class="column is-7">
+        <div class="columns">
+          <div class="column is-12">
+            <host-video />
+          </div>
+        </div>
+      </div>
+      <div class="column is-5">
+        <guest-list />
+      </div>
+    </div>
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import VideoChat from '~/components/video-chat/VideoChat.vue'
-
-import { CallStore, vxm } from '~/store'
-
+import HostVideo from '~/components/video-chat/HostVideo.vue'
+import GuestVideo from '~/components/video-chat/GuestVideo.vue'
+import GuestQueue from '~/components/video-chat/GuestQueue.vue'
+import GuestList from '~/components/guests/GuestList.vue'
 
 @Component({
   middleware: ['auth'],
   components: {
-    VideoChat,
+    HostVideo,
+    GuestVideo,
+    GuestList,
+    GuestQueue
   },
 })
 export default class extends Vue {
-  callStore: CallStore = vxm.calls
-
-  startStream(streams) {
-    this.callStore.connect(streams)
-  }
 }
 </script>
 
