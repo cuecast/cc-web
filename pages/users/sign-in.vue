@@ -2,7 +2,7 @@
   <div>
 
     <v-col cols="12">
-      <h1>CueCast</h1>
+      <h1 class="display-2">Cuecast</h1>
     </v-col>
 
     <v-col>
@@ -15,19 +15,29 @@
         <v-text-field
           label="Password"
           outlined
+          password
           v-model="form.password"
         ></v-text-field>
       </v-form>
+      <v-btn outlined @click="$auth.login('local', form)">
+        Sign In
+      </v-btn>
+      <v-btn outlined @click="$auth.login('google')">
+        <v-icon>mdi-google</v-icon>
+      </v-btn>
+      <v-btn outlined @click="$auth.login('google')">
+        <v-icon>mdi-facebook</v-icon>
+      </v-btn>
+      <v-btn outlined @click="$auth.login('google')">
+        <v-icon>mdi-twitch</v-icon>
+      </v-btn>
+
+      <br>
+      <br>
+      <v-divider />
+      <br>
+      <nuxt-link to="/users/sign-up">Can't remember my password.</nuxt-link>
     </v-col>
-
-    <div class="has-text-centered">
-      <a @click="$auth.login('local', form)" class="button is-vcentered is-primary is-outlined">Sign In</a>
-      <a @click="$auth.login('google', form)" class="button is-vcentered is-primary is-outlined">Sign In with Google</a>
-    </div>
-
-    <div class="has-text-centered">
-      <nuxt-link to="/users/sign-up"> Don't have an account? Click here to sign up.</nuxt-link>
-    </div>
   </div>
 </template>
 
@@ -42,8 +52,8 @@ interface Form {
 @Component({layout: 'sign-in'})
 export default class extends Vue {
   form: Form = {
-    email: 'blur606@gmail.com',
-    password: 'element9'
+    email: 'test@mail.com',
+    password: 'foobar'
   }
 }
 </script>

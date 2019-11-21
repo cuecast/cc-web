@@ -1,12 +1,13 @@
 <template>
   <v-app>
     <v-container fluid style="padding-top: 0">
-      <v-row justify="center">
-        <v-col sm="5">
-        <nuxt />
+      <v-row justify="center" align="center">
+        <v-col sm="4">
+          <nuxt />
         </v-col>
 
-        <v-col sm="7" class="interactive-bg">
+        <!--        <v-col sm="8" class="interactive-bg" :style="{ backgroundImage: `url(${backgroundUrl})` }">-->
+        <v-col sm="8" class="interactive-bg">
         </v-col>
 
       </v-row>
@@ -16,9 +17,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import backgroundUrl from '~/static/streamer_bg.png'
+
 
 @Component
 export default class extends Vue {
+  data() {
+    return {backgroundUrl}
+  }
 }
 </script>
 

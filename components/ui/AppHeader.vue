@@ -4,9 +4,16 @@
     clipped-left
   >
     <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-    <v-toolbar-title>CueCast
-    </v-toolbar-title>
+    <v-toolbar-title>CueCast</v-toolbar-title>
     <v-spacer></v-spacer>
+    <v-btn text class="ma-2" nuxt to="/streams">
+      Something
+      <v-icon class="ma-1">mdi-library-video</v-icon>
+    </v-btn>
+    <v-btn text class="ma-2" nuxt to="/streams">
+      Streams
+      <v-icon class="ma-1">mdi-library-video</v-icon>
+    </v-btn>
     <v-menu
       v-if="$auth.loggedIn"
       offset-y
@@ -27,7 +34,7 @@
         <v-list-item to="/users/prifle">
           <v-list-item-title>Settings</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="$auth.logout">
+        <v-list-item @click="$auth.logout()">
           <v-list-item-title>Log Out</v-list-item-title>
         </v-list-item>
       </v-list>
