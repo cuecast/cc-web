@@ -1,20 +1,21 @@
 <template>
-  <div class="columns is-vcentered">
-
-    <div class="login column is-4 ">
-      <section class="section">
+  <v-app>
+    <v-container fluid style="padding-top: 0">
+      <v-row justify="center">
+        <v-col sm="5">
         <nuxt />
-      </section>
-    </div>
+        </v-col>
 
-    <div class="interactive-bg column is-8" id="particles-js">
-    </div>
+        <v-col sm="7" class="interactive-bg">
+        </v-col>
 
-  </div>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
+import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class extends Vue {
@@ -50,7 +51,4 @@ export default class extends Vue {
 
 }
 
-.columns {
-  margin: 0px;
-}
 </style>

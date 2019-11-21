@@ -1,23 +1,24 @@
 <template>
   <div>
 
-    <h1 class="title">CueCast</h1>
+    <v-col cols="12">
+      <h1>CueCast</h1>
+    </v-col>
 
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control has-icons-right">
-        <input class="input" type="text" v-model="form.email">
-        <span class="icon is-small is-right"> <i class="fa fa-user"></i> </span>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Password</label>
-      <div class="control has-icons-right">
-        <input class="input" type="password" v-model="form.password">
-        <span class="icon is-small is-right"> <i class="fa fa-key"></i> </span>
-      </div>
-    </div>
+    <v-col>
+      <v-form>
+        <v-text-field
+          label="Email"
+          outlined
+          v-model="form.email"
+        ></v-text-field>
+        <v-text-field
+          label="Password"
+          outlined
+          v-model="form.password"
+        ></v-text-field>
+      </v-form>
+    </v-col>
 
     <div class="has-text-centered">
       <a @click="$auth.login('local', form)" class="button is-vcentered is-primary is-outlined">Sign In</a>
@@ -27,7 +28,6 @@
     <div class="has-text-centered">
       <nuxt-link to="/users/sign-up"> Don't have an account? Click here to sign up.</nuxt-link>
     </div>
-
   </div>
 </template>
 

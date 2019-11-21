@@ -129,7 +129,6 @@ export default class Auth {
     let tokens = {}
     this.authHeaders.map((authHeader) => {
       if (isUnset(headers[authHeader])) {
-        debugger
         console.log('authHeader ' + authHeader + ' is not set.')
       }
       tokens[authHeader] = this.$storage.setUniversal(authHeader, headers[authHeader])
