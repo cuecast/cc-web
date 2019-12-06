@@ -1,8 +1,7 @@
-// user.vuex.ts
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { CallStore, YoutubeStore } from '~/store'
+import { LayoutStore, CallStore, YoutubeStore, StreamStore } from '~/store'
 import { createProxy, extractVuexModule } from './cuecast-store'
 
 Vue.use(Vuex)
@@ -30,18 +29,24 @@ export const mutations = {
 export const store = new Vuex.Store({
   state: state(),
   modules: {
+    ...extractVuexModule(LayoutStore),
     ...extractVuexModule(CallStore),
     ...extractVuexModule(YoutubeStore),
+    ...extractVuexModule(StreamStore),
   },
   actions: actions,
   mutations: mutations
 })
 
+export { LayoutStore } from './layout'
 export { CallStore } from './calls'
+export { StreamStore } from './streams'
 export { YoutubeStore } from './platforms/youtube'
 
 export const vxm = {
+  layout: createProxy(store, LayoutStore),
   calls: createProxy(store, CallStore),
+  streams: createProxy(store, StreamStore),
   youtube: createProxy(store, YoutubeStore),
 }
 

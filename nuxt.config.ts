@@ -38,6 +38,7 @@ export default {
     {src: '~/plugins/nuxt-client-init.ts'},
     {src: '~/plugins/actioncable.client.ts'},
     {src: '~/plugins/auth.ts'},
+    {src: '~/plugins/faker.ts'},
   ],
   loading: {color: "#3B8070"},
   css: ["~/assets/css/main.css"],

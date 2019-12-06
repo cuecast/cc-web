@@ -9,12 +9,10 @@
       <v-form>
         <v-text-field
           label="Email"
-          outlined
           v-model="form.email"
         ></v-text-field>
         <v-text-field
           label="Password"
-          outlined
           password
           v-model="form.password"
         ></v-text-field>

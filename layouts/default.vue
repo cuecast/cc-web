@@ -2,14 +2,18 @@
   <v-app>
     <app-header />
     <app-sidebar />
-    <nuxt />
+    <v-content>
+      <v-container fluid>
+        <nuxt />
+      </v-container>
+    </v-content>
     <app-footer />
   </v-app>
 </template>
 <script lang="ts">
-import AppHeader from '@/components/ui/AppHeader'
-import AppSidebar from '@/components/ui/AppSidebar'
-import AppFooter from '@/components/ui/AppFooter'
+import AppHeader from '~/components/ui/AppHeader'
+import AppSidebar from '~/components/ui/AppSidebar'
+import AppFooter from '~/components/ui/AppFooter'
 import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({

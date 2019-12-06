@@ -42,7 +42,6 @@ export default class GoogleScheme implements AuthScheme {
       this.ctx.$auth.$storage.setState('user', res.data)
     }).catch((err: any) => {
 
-      debugger
       console.log('catch in mounted: ', err)
       this.ctx.$auth.$storage.setState('busy', false)
       this.ctx.$auth.$storage.setState('loggedIn', false)

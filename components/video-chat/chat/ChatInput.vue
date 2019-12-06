@@ -1,6 +1,9 @@
 <template>
-  <div class="chat-input">
-    <textarea name="" class="chat-input"></textarea>
+  <div class="chat-input elevation-1">
+    <textarea name="" placeholder="Enter your message here:"></textarea>
+    <v-btn class="send-btn" fab small>
+      <v-icon dark>mdi-send</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -12,11 +15,28 @@ export default class extends Vue {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chat-input {
+  display: flex;
+  background-color: #4a4a4a;
+  border-radius: 10px;
+  color: black;
+  margin: 10px;
+  width: 96%;
+  bottom: 0;
   position: absolute;
-  bottom: -7px;
-  width: 100%;
-  left: 0;
+
+  textarea {
+    padding: 10px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    color: white;
+  }
+
+  .send-btn {
+    margin: 20px;
+    align-items: end;
+  }
 }
 </style>

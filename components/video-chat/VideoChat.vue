@@ -1,12 +1,18 @@
 <template>
   <div class="video-container">
-    <video autoplay="autoplay"
-           height="100%"
-           muted
-           poster="waiting_for_guest.png"
-           :ref="videoName"
-           width="100%">
-    </video>
+    <div class="video-inner">
+      <video autoplay="autoplay"
+             muted
+             poster="waiting_for_guest.png"
+             :ref="videoName"
+             height="100%"
+      >
+      </video>
+      <v-btn class="mx-2 video-fab" raised >
+        <v-icon dark>mdi-voice</v-icon>
+        Join Cast
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -29,14 +35,28 @@ export default class extends Vue {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
 .video-container {
-  width: 100%;
-  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .video-inner {
+    position: relative;
+    height: 540px;
+  }
 }
 
-video {
-  width: 100%;
-  height: 100%;
+
+.video-fab {
+  bottom: 30px;
+  right: 45px;
+  position: absolute;
+  z-index: 999999
 }
 </style>

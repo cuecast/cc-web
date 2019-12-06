@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import StreamList from '~/pages/streams/-StreamList.vue'
+import StreamList from '~/components/streams/StreamList.vue'
 
 @Component({
   components: {StreamList}

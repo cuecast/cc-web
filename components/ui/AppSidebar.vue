@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    v-model="layoutStore.drawer"
+    fixed
     app
     clipped
   >
@@ -27,10 +28,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
+import { LayoutStore, vxm } from '~/store'
 
 @Component
 export default class extends Vue {
-  drawer: boolean = true
+  layoutStore: LayoutStore = vxm.layout
 }
 </script>
 

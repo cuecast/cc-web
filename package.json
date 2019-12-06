@@ -21,6 +21,7 @@
     "bulma": "^0.7.5",
     "cookie": "^0.4.0",
     "eslint-config-airbnb-typescript": "^6.0.0",
+    "faker": "^4.1.0",
     "install": "^0.13.0",
     "npm": "^6.12.0",
     "nuxt": "2.9.1",
@@ -51,6 +52,7 @@
     "concurrent-transform": "^1.0.0",
     "gulp": "^4.0.2",
     "gulp-awspublish": "^4.0.0",
-    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0"
+    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
+    "unsplash-js": "^6.0.0"
   }
 }

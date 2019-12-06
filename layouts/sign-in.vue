@@ -22,6 +22,9 @@ import backgroundUrl from '~/static/streamer_bg.png'
 
 @Component
 export default class extends Vue {
+  created () {
+    this.$vuetify.theme.dark = false
+  }
   data() {
     return {backgroundUrl}
   }

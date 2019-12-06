@@ -21,7 +21,9 @@ export class CallStore extends VuexModule {
   @action
   async connect (streams: any) {
     if (streams.localVideo) {
-      this.localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true})
+      this.localStream = await navigator.mediaDevices.getUserMedia({
+        audio: true, video: true
+      })
       streams.localVideo.srcObject = this.localStream
       this.localVideo = streams.localVideo
     }

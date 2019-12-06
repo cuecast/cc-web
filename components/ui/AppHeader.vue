@@ -2,17 +2,16 @@
   <v-app-bar
     app
     clipped-left
+    elevation="1"
   >
-    <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-    <v-toolbar-title>CueCast</v-toolbar-title>
+    <v-app-bar-nav-icon @click.stop="layoutStore.toggleDrawer()" />
+    <v-toolbar-title>Cuecast</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn text class="ma-2" nuxt to="/streams">
-      Something
+    <v-btn icon class="ma-2" nuxt to="/streams">
       <v-icon class="ma-1">mdi-library-video</v-icon>
     </v-btn>
-    <v-btn text class="ma-2" nuxt to="/streams">
-      Streams
-      <v-icon class="ma-1">mdi-library-video</v-icon>
+    <v-btn icon class="ma-2" nuxt to="/users/profile">
+      <v-icon class="ma-1">mdi-heart</v-icon>
     </v-btn>
     <v-menu
       v-if="$auth.loggedIn"
@@ -47,11 +46,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { LayoutStore, vxm } from '~/store'
 
-@Component({
-  components: {},
-})
+@Component()
 export default class extends Vue {
+  layoutStore: LayoutStore = vxm.layout
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-overlay">
+  <div class="">
     <chat-message :message="message" v-for="message in chatMessages" />
     <chat-input />
   </div>
@@ -20,7 +20,7 @@ export default class extends Vue {
   chatMessages: string[] = [
     {username: 'ryan23', body: 'aerlkaflk awflkawflkeawf'},
     {username: 'seb12', body: 'felkawelfk waeflkw'},
-    {username: 'cheesesniff69', body: 'awf wekflawekf'},
+    {username: 'ciwee', body: 'awf wekflawekf'},
     {username: 'dom21212', body: 'awefklw flawekf e'}
   ]
 

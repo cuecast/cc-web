@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { action, mutation, VuexModule, Module } from '~/store/cuecast-store'
 import { YoutubeStream } from '~/types'
 import { NuxtAxiosInstance } from '~/node_modules/@nuxtjs/axios'
+import {appendFile} from 'fs'
 
 declare var $nuxt: any
 
@@ -20,5 +21,4 @@ export class YoutubeStore extends VuexModule {
       this.SET_STREAMS(res.items)
     })
   }
-
 }

@@ -8,7 +8,6 @@ export interface Cast {
   name: string
 }
 
-
 export interface YoutubeStream {
   id: number
 }
@@ -23,3 +22,11 @@ export interface ChatMessage {
   body: string;
 }
 
+export interface Stream {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: string;
+  hostName: string;
+  viewers: number;
+}
